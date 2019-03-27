@@ -109,3 +109,7 @@ cmake-build-debug/CMakeFiles/TargetDirectories\.txt
 cmake-build-debug/Makefile
 
 cmake-build-debug/Scrabble\.cbp
+
+cmake-build-debug/CMakeFiles/Scrabble\.dir/depend\.internal
+
+cmake-build-debug/CMakeFiles/Scrabble\.dir/CXX\.includecache
