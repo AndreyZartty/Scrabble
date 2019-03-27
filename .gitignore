@@ -95,3 +95,21 @@ cmake-build-debug/Makefile
 cmake-build-debug/Scrabble\.cbp
 
 CMakeLists\.txt
+
+_linux/cpp\.toolchains\.xml
+
+README\.md
+
+_linux/laf\.xml
+
+codestyles/Default\.xml
+
+colors\.scheme\.xml
+
+debugger\.xml
+
+other\.xml
+
+project\.default\.xml
+
+updates\.xml
