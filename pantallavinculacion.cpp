@@ -16,6 +16,12 @@ PantallaVinculacion::~PantallaVinculacion()
 void PantallaVinculacion::on_UnirseButton_clicked()
 {
     QString x = ui->lineEdit->text();
+    if(x=="Inserte el código de invitación"){
+        x= "Inserte un código válido";
+    }
+    else {
+        x= "Gracias!!";
+    }
     ui->label->setText(x);
 
 }
