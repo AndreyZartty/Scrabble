@@ -15,6 +15,9 @@ public:
     explicit PantallaVinculacion(QWidget *parent = nullptr);
     ~PantallaVinculacion();
 
+private slots:
+    void on_UnirseButton_clicked();
+
 private:
     Ui::PantallaVinculacion *ui;
 };

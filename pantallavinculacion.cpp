@@ -12,3 +12,10 @@ PantallaVinculacion::~PantallaVinculacion()
 {
     delete ui;
 }
+
+void PantallaVinculacion::on_UnirseButton_clicked()
+{
+    QString x = ui->lineEdit->text();
+    ui->label->setText(x);
+
+}
