@@ -1,14 +1,40 @@
-//
-// Created by ruben on 27/03/19.
-//
 
-#ifndef SCRABBLE_JUGADOR_H
-#define SCRABBLE_JUGADOR_H
+#ifndef FICHAS_JUGADOR_H
+#define FICHAS_JUGADOR_H
 
 
+#include <iostream>
+#include "List.h"
+
+/**
+ * Header de Jugador.
+ *
+ * @author Ruben Salas
+ * @since 26/03/19.
+ * @version 1.0
+ */
 class Jugador {
+
+private:
+    List* listaFichas;
+    string nombre;
+    int puntaje;
+    int turnosPasados;
+
+public:
+    Jugador();
+    List* getListaFichas();
+    void setListaFichas(List* _listaFichas);
+    string getNombre();
+    void setNombre(string _nombre);
+    int getPuntaje();
+    void setPuntaje(int _puntaje);
+    int getTurnosPasados();
+    void setTurnosPasados(int _turnosPasados);
+    void reponerFichas();
+    void colocarFicha();
 
 };
 
 
-#endif //SCRABBLE_JUGADOR_H
+#endif //FICHAS_JUGADOR_H

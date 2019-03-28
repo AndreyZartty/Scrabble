@@ -1,14 +1,42 @@
-//
-// Created by ruben on 27/03/19.
-//
 
-#ifndef SCRABBLE_FICHA_H
-#define SCRABBLE_FICHA_H
+#ifndef FICHAS_FICHA_H
+#define FICHAS_FICHA_H
 
+#include <stdlib.h>
 
+using namespace std;
+
+/**
+ * Header de Ficha.
+ *
+ * @author Ruben Salas
+ * @since 26/03/19.
+ * @version 1.1
+ */
 class Ficha {
+
+private:
+    ///Letra que guardara la ficha
+    string letra;
+    ///Puntaje asignado por letra
+    int puntaje;
+    ///Flag para verificar movilidad
+    bool puedeMoverse;
+    ///Coordenadas con posicion en tablero
+    int posicion;
+
+public:
+    Ficha(string _letra, int _puntaje);
+    string getLetra();
+    void setLetra(string _letra);
+    int getPuntaje();
+    void setPuntaje(int _puntaje);
+    bool getPuedeMoverse();
+    void setPuedeMoverse(bool _puedeMoverse);
+    int getPosicion();
+    void setPosicion(int _posicion);
 
 };
 
 
-#endif //SCRABBLE_FICHA_H
+#endif //FICHAS_FICHA_H
