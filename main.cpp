@@ -10,6 +10,7 @@
 #include <cstdlib>
 #include <strings.h>
 #include <unistd.h>
+#include <cstring>
 
 
 #define PORT 3550
@@ -17,7 +18,7 @@
 
 #define MAXDATASIZE 1000
 
-
+/*
 int main(int argc, char *argv[])
 {
     int fd, numbytes;
@@ -75,4 +76,44 @@ int main(int argc, char *argv[])
 
     close(fd);
 
+}
+ */
+
+
+int main (){
+    char* str;
+    int fd, numbytes;
+    struct sockaddr_in demoserverAddr;
+
+    fd = socket(AF_INET, SOCK_STREAM, 0);
+
+    char buf[MAXDATASIZE];
+
+    struct hostent *he;
+
+    if (fd < 0)
+    {
+        printf("Error : Could not create socket\n");
+        return 1;
+    }
+    else
+    {
+        demoserverAddr.sin_family = AF_INET;
+        demoserverAddr.sin_port = htons(PORT);
+        demoserverAddr.sin_addr.s_addr = htonl(INADDR_ANY);
+        memset(demoserverAddr.sin_zero, '\0', sizeof(demoserverAddr.sin_zero));
+    }
+
+    if (connect(fd, (const struct sockaddr *)&demoserverAddr, sizeof(demoserverAddr)) < 0)
+    {
+        printf("ERROR connecting to server\n");
+        return 1;
+    }
+
+    buf[numbytes]='\0';
+
+    printf("Mensaje del Servidor: %s\n",buf);
+
+
+    close(fd);
 }
