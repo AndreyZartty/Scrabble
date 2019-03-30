@@ -11,6 +11,7 @@
 #include <strings.h>
 #include <unistd.h>
 #include <cstring>
+#include <iostream>
 
 
 #define PORT 3550
@@ -18,72 +19,10 @@
 
 #define MAXDATASIZE 1000
 
-/*
-int main(int argc, char *argv[])
-{
-    int fd, numbytes;
-
-
-    char buf[MAXDATASIZE];
-
-
-    struct hostent *he;
-
-
-    struct sockaddr_in server;
-
-
-    if (argc !=2) {
-
-        printf("Uso: %s <Dirección IP>\n",argv[0]);
-        exit(-1);
-    }
-
-    if ((he=gethostbyname(argv[1]))==NULL){
-        printf("gethostbyname() error\n");
-        exit(-1);
-    }
-
-    if ((fd=socket(AF_INET, SOCK_STREAM, 0))==-1){
-        printf("socket() error\n");
-        exit(-1);
-    }
-
-    server.sin_family = AF_INET;
-    server.sin_port = htons(PORT);
-
-    server.sin_addr = *((struct in_addr *)he->h_addr);
-
-    bzero(&(server.sin_zero),8);
-
-    if(connect(fd, (struct sockaddr *)&server,
-               sizeof(struct sockaddr))==-1){
-
-        printf("connect() error\n");
-        exit(-1);
-    }
-
-    if ((numbytes=recv(fd,buf,MAXDATASIZE,0)) == -1){
-
-        printf("Error en recv() \n");
-        exit(-1);
-    }
-
-    buf[numbytes]='\0';
-
-    printf("Mensaje del Servidor: %s\n",buf);
-
-
-    close(fd);
-
-}
- */
-
-
 int main (){
     char* str;
     int fd, numbytes;
-    struct sockaddr_in demoserverAddr;
+    struct sockaddr_in client;
 
     fd = socket(AF_INET, SOCK_STREAM, 0);
 
@@ -98,22 +37,29 @@ int main (){
     }
     else
     {
-        demoserverAddr.sin_family = AF_INET;
-        demoserverAddr.sin_port = htons(PORT);
-        demoserverAddr.sin_addr.s_addr = htonl(INADDR_ANY);
-        memset(demoserverAddr.sin_zero, '\0', sizeof(demoserverAddr.sin_zero));
+        client.sin_family = AF_INET;
+        client.sin_port = htons(PORT);
+        client.sin_addr.s_addr = htonl(INADDR_ANY);
+        memset(client.sin_zero, '\0', sizeof(client.sin_zero));
     }
 
-    if (connect(fd, (const struct sockaddr *)&demoserverAddr, sizeof(demoserverAddr)) < 0)
+    if (connect(fd, (const struct sockaddr *)&client, sizeof(client)) < 0)
     {
         printf("ERROR connecting to server\n");
         return 1;
     }
 
-    buf[numbytes]='\0';
+    if ((numbytes=recv(fd,buf,MAXDATASIZE,0)) < 0){
+
+        printf("Error en recv() \n");
+        exit(-1);
+    }
+
+
 
     printf("Mensaje del Servidor: %s\n",buf);
 
+    memset(buf, 0, MAXDATASIZE);
 
     close(fd);
 }
