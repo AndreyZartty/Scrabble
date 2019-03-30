@@ -12,6 +12,8 @@
 #include <unistd.h>
 #include <cstring>
 #include <iostream>
+#include <json-c/json.h>
+
 
 
 #define PORT 3550
@@ -48,7 +50,7 @@ int main (){
         printf("ERROR connecting to server\n");
         return 1;
     }
-
+/*
     if ((numbytes=recv(fd,buf,MAXDATASIZE,0)) < 0){
 
         printf("Error en recv() \n");
@@ -57,7 +59,31 @@ int main (){
 
 
 
-    printf("Mensaje del Servidor: %s\n",buf);
+    printf("Mensaje del Servidor: %s\n",buf);*/
+
+    json_object *jobj = json_object_new_object();
+
+    json_object *jstring = json_object_new_string("josesol_mo");
+
+    json_object *jint = json_object_new_int(4);
+
+    json_object_object_add(jobj,"HOST", jstring);
+    json_object_object_add(jobj,"CANTIDAD DE JUGADORES", jint);
+
+
+
+    if (strcpy(buf, json_object_to_json_string(jobj)) == NULL) {
+        printf("ERROR strcpy()");
+        exit(-1);
+    }
+
+    if (write(fd, buf, strlen(buf)) == -1)
+    {
+        printf("ERROR write()");
+        exit(-1);
+    }
+
+    printf("Written data\n");
 
     memset(buf, 0, MAXDATASIZE);
 
