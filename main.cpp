@@ -13,6 +13,8 @@
 #include <cstring>
 #include <iostream>
 #include <json-c/json.h>
+#include <json-c/debug.h>
+#include <json-c/json_object.h>
 
 
 
@@ -50,16 +52,6 @@ int main (){
         printf("ERROR connecting to server\n");
         return 1;
     }
-/*
-    if ((numbytes=recv(fd,buf,MAXDATASIZE,0)) < 0){
-
-        printf("Error en recv() \n");
-        exit(-1);
-    }
-
-
-
-    printf("Mensaje del Servidor: %s\n",buf);*/
 
     json_object *jobj = json_object_new_object();
 
