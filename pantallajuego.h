@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+using namespace std;
+
 namespace Ui {
 class PantallaJuego;
 }
@@ -14,6 +16,8 @@ class PantallaJuego : public QMainWindow
 public:
     explicit PantallaJuego(QWidget *parent = nullptr);
     ~PantallaJuego();
+private slots:
+    int Crear_J();
 
 private:
     Ui::PantallaJuego *ui;

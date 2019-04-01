@@ -7,6 +7,9 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
 add_executable(Client main.cpp)
 
+add_library(my_library pantallajuego.cpp)
+
+
 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(JSON-C json-c)

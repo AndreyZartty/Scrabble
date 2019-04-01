@@ -15,6 +15,8 @@
 #include <json-c/json.h>
 #include <json-c/debug.h>
 #include <json-c/json_object.h>
+#include <pantallajuego.h>
+#include <QApplication>
 
 
 
@@ -23,7 +25,15 @@
 
 #define MAXDATASIZE 1000
 
-int main (){
+int main (int argc, char *argv[]){
+
+    QApplication a(argc, argv);
+
+    PantallaJuego w;
+    w.show();
+
+    return a.exec();
+
     char* str;
     int fd, numbytes;
     struct sockaddr_in client;
