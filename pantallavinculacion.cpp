@@ -54,7 +54,7 @@ int PantallaVinculacion::SendJson()
     {
         client.sin_family = AF_INET;
         client.sin_port = htons(PORT);
-        client.sin_addr.s_addr = inet_addr("192.168.100.13");
+        client.sin_addr.s_addr = inet_addr("192.168.100.28");
         memset(client.sin_zero, '\0', sizeof(client.sin_zero));
     }
 
