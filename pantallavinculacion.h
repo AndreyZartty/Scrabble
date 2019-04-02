@@ -20,6 +20,7 @@ private slots:
 
 private:
     Ui::PantallaVinculacion *ui;
+    int SendJson();
 };
 
 #endif // PANTALLAVINCULACION_H
