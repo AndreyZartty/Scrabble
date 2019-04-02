@@ -3,6 +3,7 @@
 #define FICHAS_FICHA_H
 
 #include <stdlib.h>
+#include <iostream>
 
 using namespace std;
 
@@ -11,7 +12,7 @@ using namespace std;
  *
  * @author Ruben Salas
  * @since 26/03/19.
- * @version 1.1
+ * @version 1.2
  */
 class Ficha {
 

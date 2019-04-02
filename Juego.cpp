@@ -2,7 +2,6 @@
 #include <cstdlib>
 #include <time.h>
 
-
 #include "Juego.h"
 
 /**
@@ -10,7 +9,7 @@
  *
  * @author Ruben Salas
  * @since 27/03/19.
- * @version 1.0
+ * @version 1.2
  */
 
 
@@ -27,81 +26,190 @@ Juego::Juego(){
     j2 = nullptr;
     j3 = nullptr;
     j4 = nullptr;
+    cuadricula = new Cuadricula();
+    terminado = false;
 }
 
+/**
+ * Getter del creador de fichas.
+ * @return creator
+ */
 FichaCreator* Juego::getCreator() {
     return creator;
 }
 
+/**
+ * Setter del creador de fichas
+ * @param _creator
+ */
 void Juego::setCreator(FichaCreator* _creator) {
     creator = _creator;
 }
 
+/**
+ * Getter del Jugador #1
+ * @return j1
+ */
 Jugador* Juego::getJ1() {
     return j1;
 }
 
+/**
+ * Setter del Jugador #1
+ * @param _j1
+ */
 void Juego::setJ1(Jugador* _j1) {
     j1 = _j1;
 }
 
+/**
+ * Setter del Jugador #2
+ * @return j2
+ */
 Jugador* Juego::getJ2() {
     return j2;
 }
 
+/**
+ *
+ * @param _j2
+ */
 void Juego::setJ2(Jugador* _j2) {
     j2 = _j2;
 }
 
+/**
+ *
+ * @return
+ */
 Jugador* Juego::getJ3() {
     return j3;
 }
 
+/**
+ *
+ * @param _j3
+ */
 void Juego::setJ3(Jugador* _j3) {
     j3 = _j3;
 }
 
+/**
+ *
+ * @return
+ */
 Jugador* Juego::getJ4() {
     return j4;
 }
 
+/**
+ *
+ * @param _j4
+ */
 void Juego::setJ4(Jugador* _j4) {
     j4 = _j4;
 }
 
+/**
+ *
+ * @return
+ */
 int Juego::getCantJugadoresActuales() {
     return cantJugadoresActuales;
 }
 
+/**
+ *
+ * @param _cantJugadoresActuales
+ */
 void Juego::setCantJugadoresActuales(int _cantJugadoresActuales) {
     cantJugadoresActuales = _cantJugadoresActuales;
 }
 
+/**
+ *
+ * @return
+ */
 int Juego::getCantJugadoresPermitidos() {
     return cantJugadoresPermitidos;
 }
 
+/**
+ *
+ * @param _cantJugadoresPermitidos
+ */
 void Juego::setCantJugadoresPermitidos(int _cantJugadoresPermitidos) {
     cantJugadoresPermitidos = _cantJugadoresPermitidos;
 }
 
+/**
+ *
+ * @return
+ */
+Cuadricula* Juego::getCuadricula() {
+    return cuadricula;
+}
+
+/**
+ *
+ * @param _cuadricula
+ */
+void Juego::setCuadricula(Cuadricula* _cuadricula) {
+    cuadricula = _cuadricula;
+}
+
+/**
+ *
+ * @return
+ */
 List* Juego::getPoolFichas() {
     return poolFichas;
 }
 
+/**
+ *
+ * @param _poolFichas
+ */
 void Juego::setPoolFichas(List* _poolFichas) {
     poolFichas = _poolFichas;
 }
 
+/**
+ *
+ * @return
+ */
 int Juego::getCantFichas() {
     return cantFichas;
 }
 
+/**
+ *
+ * @param _cantFichas
+ */
 void Juego::setCantFichas(int _cantFichas) {
     cantFichas = _cantFichas;
 }
 
+/**
+ *
+ * @return
+ */
+bool Juego::isTerminado() {
+    return terminado;
+}
 
+/**
+ *
+ * @param _terminado
+ */
+void Juego::setTerminado(bool _terminado) {
+    terminado = _terminado;
+}
+
+/**
+ * Añade un jugador y verifica si hay campo en el juego.
+ * @param nJugador
+ */
 void Juego::addJugador(Jugador* nJugador) {
     if (j4 == nullptr) {
         if (j3 == nullptr) {
@@ -118,6 +226,7 @@ void Juego::addJugador(Jugador* nJugador) {
             j4 = nJugador;
         }
         cantJugadoresActuales++;
+
     } else {
         cout << "Todos los espacios disponibles estan ocupados." << endl;
     }
@@ -140,17 +249,13 @@ void Juego::crearFichas(){
  * Reparte las fichas entre los Jugadores existentes dando 7 a cada uno.
  */
 void Juego::repartirFichas(){
-    ///Random pick del pool 7 por jugador
-
     ///Genera un valor diferente cada vez que se llame a la funcion dependiendo de la hora y fecha.
     srand (time(NULL));
     ///Obtiene un int aleatorio
     int random0 = rand() % cantFichas + 1;
 
     if (j1 != nullptr) {
-
-        cout << "\nJugador 1 listo para recibir fichas." << endl;
-        cout << "Repartiendo fichas Jugador 1" << endl;
+        cout << "\nRepartiendo fichas Jugador 1" << endl;
 
         ///Lista del jugador 1
         List* lF1 = new List();
@@ -170,12 +275,12 @@ void Juego::repartirFichas(){
             ///Disminuye el contador del jugador 1
             i1--;
         }
-        lF1->printList();
+        j1->setListaFichas(lF1);
+        j1->getListaFichas()->printList();
 
     }
     if (j2 != nullptr) {
-        cout << "\nJugador 2 listo para recibir fichas." << endl;
-        cout << "Repartiendo fichas Jugador 2" << endl;
+        cout << "\nRepartiendo fichas Jugador 2" << endl;
 
         ///Lista del jugador 2
         List* lF2 = new List();
@@ -195,11 +300,11 @@ void Juego::repartirFichas(){
             ///Disminuye el contador del jugador 1
             i2--;
         }
-        lF2->printList();
+        j2->setListaFichas(lF2);
+        j2->getListaFichas()->printList();
     }
     if (j3 != nullptr) {
-        cout << "\nJugador 3 listo para recibir fichas." << endl;
-        cout << "Repartiendo fichas Jugador 3" << endl;
+        cout << "\nRepartiendo fichas Jugador 3" << endl;
 
         ///Lista del jugador 3
         List* lF3 = new List();
@@ -219,11 +324,11 @@ void Juego::repartirFichas(){
             ///Disminuye el contador del jugador 1
             i3--;
         }
-        lF3->printList();
+        j3->setListaFichas(lF3);
+        j3->getListaFichas()->printList();
     }
     if (j4 != nullptr) {
-        cout << "\nJugador 4 listo para recibir fichas." << endl;
-        cout << "Repartiendo fichas Jugador 4" << endl;
+        cout << "\nRepartiendo fichas Jugador 4" << endl;
 
         ///Lista del jugador 4
         List* lF4 = new List();
@@ -243,12 +348,22 @@ void Juego::repartirFichas(){
             ///Disminuye el contador del jugador 1
             i4--;
         }
-        lF4->printList();
+        j4->setListaFichas(lF4);
+        j4->getListaFichas()->printList();
     }
 
     if (cantJugadoresActuales == 0) {
         cout << "No hay jugadores disponibles para repartir fichas." << endl;
     }
 
+}
+
+/**
+ * Reestablece la cantidad de fichas de cada jugador luego de su turno.
+ */
+void Juego::reestablecerFichas(){
 
 }
+
+
+

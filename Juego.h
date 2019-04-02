@@ -5,14 +5,15 @@
 
 #include "Jugador.h"
 #include "FichaCreator.h"
+#include "Cuadricula.h"
 
 
 /**
  * Header de Juego.
  *
  * @author Ruben Salas
- * @since 27/03/19.
- * @version 1.0
+ * @since 27/03/19
+ * @version 1.1
  */
 class Juego {
 
@@ -22,12 +23,13 @@ private:
     Jugador* j2;
     Jugador* j3;
     Jugador* j4;
+    Jugador* enTurno;
     int cantJugadoresActuales;
     int cantJugadoresPermitidos;
-    //Tablero;
+    Cuadricula* cuadricula;
     List* poolFichas;
     int cantFichas;
-    //Terminado;
+    bool terminado;
     //Codigo;
     //Turno;
 
@@ -44,18 +46,27 @@ public:
     void setJ3(Jugador* _j3);
     Jugador* getJ4();
     void setJ4(Jugador* _j4);
+    Jugador* getEnTurno();
+    void setEnTurno();
     int getCantJugadoresActuales();
     void setCantJugadoresActuales(int _cantJugadoresActuales);
     int getCantJugadoresPermitidos();
     void setCantJugadoresPermitidos(int _cantJugadoresPermitidos);
+    Cuadricula* getCuadricula();
+    void setCuadricula(Cuadricula* _cuadricula);
     List* getPoolFichas();
     void setPoolFichas(List* _poolFichas);
     int getCantFichas();
     void setCantFichas(int _cantFichas);
 
+    bool isTerminado();
+
+    void setTerminado(bool _terminado);
+
     void addJugador(Jugador* nJugador);
     void crearFichas();
     void repartirFichas();
+    void reestablecerFichas();
 
 };
 

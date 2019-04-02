@@ -12,7 +12,7 @@ using namespace std;
  *
  * @author Ruben Salas
  * @since 26/03/19.
- * @version 1.1
+ * @version 1.2
  */
 
 /**
@@ -181,9 +181,18 @@ void FichaCreator::initialCreate() {
     }
 }
 
+/**
+ * Getter del pool
+ * @return pool
+ */
 List* FichaCreator::getPool(){
     return pool;
 }
+
+/**
+ * Setter del pool
+ * @param _pool - List
+ */
 void FichaCreator::setPool(List* _pool){
     pool = _pool;
 }

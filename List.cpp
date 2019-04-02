@@ -13,7 +13,7 @@ using namespace std;
  *
  * @author Ruben Salas
  * @since 26/03/19.
- * @version 1.1
+ * @version 1.2
  */
 
 
@@ -76,10 +76,6 @@ void List::newNode(Ficha* ficha){
 
     len+=1;
 
-    //cout << "\n" << endl;
-    //printList();
-
-
 }
 
 /**
@@ -137,12 +133,14 @@ void List::printList() {
     cout << "length: " << len << "\n[ ";
     Node* temp = head;
     while (temp != nullptr) {
-        cout << temp->getFicha()->getLetra() << ", ";
-        temp = temp->getNext();
         ///Para que no imprima el ultimo con una coma
         if (temp->getNext() == nullptr) {
-            cout << temp->getFicha()->getLetra() << " ]" << endl;
-            temp = temp->getNext();
+            cout << temp->getFicha()->getLetra() ;
+            break;
         }
+        cout << temp->getFicha()->getLetra() << ", ";
+        temp = temp->getNext();
     }
+
+    cout << " ]" << endl;
 }

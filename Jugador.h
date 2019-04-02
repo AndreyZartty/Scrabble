@@ -11,7 +11,7 @@
  *
  * @author Ruben Salas
  * @since 26/03/19.
- * @version 1.0
+ * @version 1.1
  */
 class Jugador {
 
@@ -22,7 +22,7 @@ private:
     int turnosPasados;
 
 public:
-    Jugador();
+    Jugador(string _nombre);
     List* getListaFichas();
     void setListaFichas(List* _listaFichas);
     string getNombre();
@@ -32,7 +32,7 @@ public:
     int getTurnosPasados();
     void setTurnosPasados(int _turnosPasados);
     void reponerFichas();
-    void colocarFicha();
+    Ficha* colocarFicha(Ficha* ficha);
 
 };
 
