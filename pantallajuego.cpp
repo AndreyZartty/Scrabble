@@ -6,6 +6,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
+#include <arpa/inet.h>
 #include <cstdlib>
 #include <strings.h>
 #include <unistd.h>
@@ -53,7 +54,7 @@ int PantallaJuego::Crear_J(){
     {
         client.sin_family = AF_INET;
         client.sin_port = htons(PORT);
-        client.sin_addr.s_addr = htonl(INADDR_ANY);
+        client.sin_addr.s_addr = inet_addr("192.168.100.13");
         memset(client.sin_zero, '\0', sizeof(client.sin_zero));
     }
 
@@ -63,11 +64,14 @@ int PantallaJuego::Crear_J(){
         return 1;
     }
 
+    QString nick = ui->nick_line->text();
+    QString cant = ui->cant_spin->text();
+
     json_object *jobj = json_object_new_object();
 
-    json_object *jstring = json_object_new_string("jose");
+    json_object *jstring = json_object_new_string(nick.toUtf8().constData());
 
-    json_object *jint = json_object_new_int(2);
+    json_object *jint = json_object_new_int(cant.toInt());
 
     json_object_object_add(jobj,"HOST", jstring);
     json_object_object_add(jobj,"CANTIDAD DE JUGADORES", jint);
