@@ -28,7 +28,7 @@ List::List() {
  * Getter del head de List.
  * @returns head - primera Ficha de List
  */
-Node* List::getHead() {
+NodeFicha* List::getHead() {
     return head;
 }
 
@@ -36,7 +36,7 @@ Node* List::getHead() {
  * Setter del head de List.
  * @param _head - Ficha
  */
-void List::setHead(Node* _head) {
+void List::setHead(NodeFicha* _head) {
     head = _head;
 }
 
@@ -62,13 +62,13 @@ void List::setLen(int _len) {
  */
 void List::newNode(Ficha* ficha){
 
-    Node* nNode = new Node(ficha);
+    NodeFicha* nNode = new NodeFicha(ficha);
 
 
     if (head == nullptr) {
         head = nNode;
     } else {
-        Node* temp = head;
+        NodeFicha* temp = head;
         head = nNode;
         nNode->setNext(temp);
     }
@@ -82,9 +82,9 @@ void List::newNode(Ficha* ficha){
  * @param data
  */
 void List::deleteNode(Ficha* ficha){
-    Node* delNode = nullptr;
-    Node* temp = head;
-    Node* aux = head;
+    NodeFicha* delNode = nullptr;
+    NodeFicha* temp = head;
+    NodeFicha* aux = head;
     while (aux != nullptr && aux->getFicha() != ficha) {
         temp = aux;
         aux = aux->getNext();
@@ -112,8 +112,8 @@ void List::deleteNode(Ficha* ficha){
 /**
  * Retorna un Node por su index
  */
-Node* List::getNode(int index){
-    Node* temp = nullptr;
+NodeFicha* List::getNode(int index){
+    NodeFicha* temp = nullptr;
     if (index <= len) {
         int i = 1;
         temp = head;
@@ -130,7 +130,7 @@ Node* List::getNode(int index){
  */
 void List::printList() {
     cout << "length: " << len << "\n[ ";
-    Node* temp = head;
+    NodeFicha* temp = head;
     while (temp != nullptr) {
         ///Para que no imprima el ultimo con una coma
         if (temp->getNext() == nullptr) {

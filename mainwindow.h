@@ -18,12 +18,17 @@ public:
     ~MainWindow();
 
 private slots:
+    void on_iniciarButton_clicked();
+    void on_comenzarButton_clicked();
     void on_scrabbleButton_clicked();
     void on_pasarButton_clicked();
 
+
 private:
+
     Ui::MainWindow *ui;
     int SendJson(string boton);
+    string getCodigo();
     void test();
 };
 

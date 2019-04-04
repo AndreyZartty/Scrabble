@@ -19,6 +19,10 @@
 #define PORT 3550
 #define MAXDATASIZE 1000
 
+string MainWindow::getCodigo() {
+    return "0001";
+}
+
 using namespace std;
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -54,7 +58,7 @@ int MainWindow::SendJson(string boton)
     {
         client.sin_family = AF_INET;
         client.sin_port = htons(PORT);
-        client.sin_addr.s_addr = inet_addr("192.168.100.12");
+        client.sin_addr.s_addr = inet_addr("192.168.100.9");
         memset(client.sin_zero, '\0', sizeof(client.sin_zero));
     }
 
@@ -67,11 +71,12 @@ int MainWindow::SendJson(string boton)
     json_object *jobj = json_object_new_object();
 
 
+    json_object *jstringCodigo = json_object_new_string(getCodigo().c_str());
     json_object *jstring = json_object_new_string(boton.c_str());
 
 
-    //json_object_object_add(jobj,"Nombre", jstring2);
-    json_object_object_add(jobj,"Id", jstring);
+    json_object_object_add(jobj,"CODIGO", jstringCodigo);
+    json_object_object_add(jobj,"BOTON", jstring);
 
 
 
@@ -97,9 +102,16 @@ void MainWindow::test(){
     cout << "Test" << endl;
 }
 
+void MainWindow::on_iniciarButton_clicked() {
+    SendJson("Iniciar");
+}
+
+void MainWindow::on_comenzarButton_clicked() {
+    SendJson("Comenzar");
+}
+
 void MainWindow::on_scrabbleButton_clicked() {
-    //test();
-    SendJson("Scrabble");
+    SendJson("Scrabble!");
 }
 
 void MainWindow::on_pasarButton_clicked() {

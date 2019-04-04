@@ -27,23 +27,23 @@ CONFIG += c++11
 SOURCES += \
         mainwindow.cpp \
     main.cpp \
-    Cuadricula.cpp \
-    Ficha.cpp \
-    FichaCreator.cpp \
-    Juego.cpp \
-    Jugador.cpp \
-    List.cpp \
-    Node.cpp
+   # Cuadricula.cpp \
+   # Ficha.cpp \
+   # FichaCreator.cpp \
+   # Juego.cpp \
+   # Jugador.cpp \
+   # List.cpp \
+   # Node.cpp
 
 HEADERS += \
         mainwindow.h \
-    Cuadricula.h \
-    Ficha.h \
-    FichaCreator.h \
-    Juego.h \
-    Jugador.h \
-    List.h \
-    Node.h
+  #  Cuadricula.h \
+  #  Ficha.h \
+  #  FichaCreator.h \
+   # Juego.h \
+  #  Jugador.h \
+  #  List.h \
+  #  Node.h
 
 FORMS += \
         mainwindow.ui

@@ -295,6 +295,9 @@ void Juego::crearFichas(){
     setPoolFichas(creator->getPool());
     ///Agrega el valor de la cantidad de fichas que hayan en el pool
     setCantFichas(poolFichas->getLen());
+
+    cout << "Fichas creadas.\n" << endl;
+
 }
 
 /**

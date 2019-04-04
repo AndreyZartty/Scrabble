@@ -1,6 +1,6 @@
 
 #include "Cuadricula.h"
-#include "Node.h"
+#include "NodeFicha.h"
 
 Cuadricula::Cuadricula() {
     listaCuadricula = new List();

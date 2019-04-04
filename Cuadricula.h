@@ -2,21 +2,13 @@
 #ifndef SCRABBLE_CUADRICULA_H
 #define SCRABBLE_CUADRICULA_H
 
-#include "Node.h"
+#include "NodeFicha.h"
 #include "List.h"
 
 class Cuadricula {
 
 private:
     List* listaCuadricula;
-    int hola;
-
-    //int tamano;
-    //Node casillasOcu[0];
-    //Node casillasEsp[0];
-    //Node matriz[0][0];
-    //int cOcupadas=0;
-    //int cEspeciales=0;
 
 
 public:

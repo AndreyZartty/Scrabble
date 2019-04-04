@@ -4,7 +4,7 @@
 
 #include <stdlib.h>
 
-#include "Node.h"
+#include "NodeFicha.h"
 
 /**
  * Header de List.
@@ -16,19 +16,19 @@ class List {
 
 private:
     ///Primer node de List
-    Node* head;
+    NodeFicha* head;
     ///Cantidad de nodos en List
     int len;
 
 public:
     List();
-    Node* getHead();
-    void setHead(Node* _head);
+    NodeFicha* getHead();
+    void setHead(NodeFicha* _head);
     int getLen();
     void setLen(int _len);
     void newNode(Ficha* ficha);
     void deleteNode(Ficha* ficha);
-    Node* getNode(int index);
+    NodeFicha* getNode(int index);
     void printList();
 
 

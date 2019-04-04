@@ -94,7 +94,7 @@ void Jugador::reponerFichas(){
  */
 Ficha* Jugador::colocarFicha(Ficha* ficha){
     Ficha* sendee = nullptr;
-    Node* temp = listaFichas->getHead();
+    NodeFicha* temp = listaFichas->getHead();
 
     while (temp != nullptr) {
         if (ficha == temp->getFicha()) {
