@@ -28,20 +28,26 @@ void lectura(string nombre, string dcc[]){
     }
 }
 
-int main(){
-    string diccionario[186594] ={};
+int comprobarPalabra(string nueva){
+    int aDcc = 186594;
+    string diccionario[190000] ={};
     lectura("/home/cucho16/Documentos/Proyectos C++/Scrabble/diccio.txt", diccionario);
-    cout << diccionario[139108] << endl;
-    string prueba = "planta";
     int c=0 ;
-    while(c<=186594){
+    while(c < aDcc){
         string actual = diccionario[c].substr(0,diccionario[c].length()-1);
         //cout << actual << endl;
-        if(actual.compare(prueba) == 0){
-            cout << c << endl;
-            break;
+        if(actual.compare(nueva) == 0){
+            cout << "La palabra '"<< nueva << "' se encuentra en el diccionario en la posición: "<< c << endl;
+            return 0;
         }
         c++;
     }
+    cout << "La palabra '" << nueva << "' no se encuentra en el diccionario."<< endl;
+}
+
+int main(){
+
+    string prueba = "exito";
+    comprobarPalabra(prueba);
 }
 
