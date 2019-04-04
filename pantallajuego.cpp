@@ -54,7 +54,7 @@ int PantallaJuego::Crear_J(){
     {
         client.sin_family = AF_INET;
         client.sin_port = htons(PORT);
-        client.sin_addr.s_addr = inet_addr("192.168.100.13");
+        client.sin_addr.s_addr = inet_addr("192.168.100.9");
         memset(client.sin_zero, '\0', sizeof(client.sin_zero));
     }
 
@@ -73,8 +73,8 @@ int PantallaJuego::Crear_J(){
 
     json_object *jint = json_object_new_int(cant.toInt());
 
-    json_object_object_add(jobj,"HOST", jstring);
-    json_object_object_add(jobj,"CANTIDAD DE JUGADORES", jint);
+    json_object_object_add(jobj,"JUGADOR", jstring);
+    json_object_object_add(jobj,"JUGADORES PERMITIDOS", jint);
 
 
 
@@ -94,4 +94,11 @@ int PantallaJuego::Crear_J(){
     memset(buf, 0, MAXDATASIZE);
 
     ::close(fd);
+}
+
+void PantallaJuego::on_graf_button_clicked()
+{
+    pantallaTablero *tab = new pantallaTablero;
+    tab->show();
+    hide();
 }

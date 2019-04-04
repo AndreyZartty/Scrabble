@@ -2,6 +2,7 @@
 #define PANTALLAJUEGO_H
 
 #include <QMainWindow>
+#include <pantallatablero.h>
 
 using namespace std;
 
@@ -18,6 +19,8 @@ public:
     ~PantallaJuego();
 private slots:
     int Crear_J();
+
+    void on_graf_button_clicked();
 
 private:
     Ui::PantallaJuego *ui;

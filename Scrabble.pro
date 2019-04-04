@@ -26,13 +26,16 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        pantallajuego.cpp
+        pantallajuego.cpp \
+    pantallatablero.cpp
 
 HEADERS += \
-        pantallajuego.h
+        pantallajuego.h \
+    pantallatablero.h
 
 FORMS += \
-        pantallajuego.ui
+        pantallajuego.ui \
+    pantallatablero.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
