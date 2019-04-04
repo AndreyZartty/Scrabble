@@ -13,31 +13,35 @@
  *
  * @author Ruben Salas
  * @since 27/03/19
- * @version 1.1
  */
 class Juego {
 
 private:
-    FichaCreator* creator;
+    string codigo;
+    int cantJugadoresPermitidos;
+    int cantJugadoresActuales;
     Jugador* j1;
     Jugador* j2;
     Jugador* j3;
     Jugador* j4;
-    Jugador* enTurno;
-    int cantJugadoresActuales;
-    int cantJugadoresPermitidos;
     Cuadricula* cuadricula;
+    FichaCreator* creator;
     List* poolFichas;
     int cantFichas;
     bool terminado;
-    //Codigo;
-    //Turno;
+    Jugador* enTurno;
+    Jugador* ganador;
 
 public:
-    Juego();
+    Juego(string codigo, int _cantJugadoresPermitidos);
 
-    FichaCreator* getCreator();
-    void setCreator(FichaCreator* _creator);
+    //Getters & Setters
+    string getCodigo();
+    void setCodigo(string _codigo);
+    int getCantJugadoresActuales();
+    void setCantJugadoresActuales(int _cantJugadoresActuales);
+    int getCantJugadoresPermitidos();
+    void setCantJugadoresPermitidos(int _cantJugadoresPermitidos);
     Jugador* getJ1();
     void setJ1(Jugador* _j1);
     Jugador* getJ2();
@@ -46,27 +50,30 @@ public:
     void setJ3(Jugador* _j3);
     Jugador* getJ4();
     void setJ4(Jugador* _j4);
-    Jugador* getEnTurno();
-    void setEnTurno();
-    int getCantJugadoresActuales();
-    void setCantJugadoresActuales(int _cantJugadoresActuales);
-    int getCantJugadoresPermitidos();
-    void setCantJugadoresPermitidos(int _cantJugadoresPermitidos);
     Cuadricula* getCuadricula();
     void setCuadricula(Cuadricula* _cuadricula);
+    FichaCreator* getCreator();
+    void setCreator(FichaCreator* _creator);
     List* getPoolFichas();
     void setPoolFichas(List* _poolFichas);
     int getCantFichas();
     void setCantFichas(int _cantFichas);
-
+    Jugador* getEnTurno();
+    void setEnTurno(Jugador* _jugador);
     bool isTerminado();
-
     void setTerminado(bool _terminado);
+    Jugador* getGanador();
+    void setGanador(Jugador *ganador);
 
+    //Funciones
     void addJugador(Jugador* nJugador);
     void crearFichas();
     void repartirFichas();
-    void reestablecerFichas();
+    void completarFichas(Jugador* jugador);
+    void checkTurnosPasados();
+    void checkTerminado();
+    void siguienteTurno();
+
 
 };
 

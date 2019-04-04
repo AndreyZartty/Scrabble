@@ -9,25 +9,42 @@
  *
  * @author Ruben Salas
  * @since 27/03/19.
- * @version 1.2
  */
 
 
 /**
  * Constructor de Juego.
  */
-Juego::Juego(){
+Juego::Juego(string _codigo, int _cantJugadoresPermitidos){
+    codigo = _codigo;
     creator = new FichaCreator();
     poolFichas = nullptr;
     cantFichas = 0;
     cantJugadoresActuales = 0;
-    cantJugadoresPermitidos = 0;
+    cantJugadoresPermitidos = _cantJugadoresPermitidos;
     j1 = nullptr;
     j2 = nullptr;
     j3 = nullptr;
     j4 = nullptr;
     cuadricula = new Cuadricula();
     terminado = false;
+    enTurno = nullptr;
+}
+
+/**
+ *
+ * @return
+ */
+string Juego::getCodigo() {
+    return codigo;
+}
+
+/**
+ *
+ * @param _codigo
+ */
+void Juego::setCodigo(string _codigo) {
+    codigo = _codigo;
 }
 
 /**
@@ -207,6 +224,41 @@ void Juego::setTerminado(bool _terminado) {
 }
 
 /**
+ *
+ */
+Jugador* Juego::getEnTurno() {
+    return enTurno;
+}
+
+/**
+ *
+ * @param enTurno
+ */
+void Juego::setEnTurno(Jugador *enTurno) {
+    Juego::enTurno = enTurno;
+}
+
+/**
+ *
+ * @return
+ */
+Jugador* Juego::getGanador() {
+    return ganador;
+}
+
+/**
+ *
+ * @param _ganador
+ */
+void Juego::setGanador(Jugador* _ganador) {
+    ganador = _ganador;
+}
+
+
+//Funciones
+
+
+/**
  * Añade un jugador y verifica si hay campo en el juego.
  * @param nJugador
  */
@@ -251,8 +303,6 @@ void Juego::crearFichas(){
 void Juego::repartirFichas(){
     ///Genera un valor diferente cada vez que se llame a la funcion dependiendo de la hora y fecha.
     srand (time(NULL));
-    ///Obtiene un int aleatorio
-    int random0 = rand() % cantFichas + 1;
 
     if (j1 != nullptr) {
         cout << "\nRepartiendo fichas Jugador 1" << endl;
@@ -359,11 +409,137 @@ void Juego::repartirFichas(){
 }
 
 /**
- * Reestablece la cantidad de fichas de cada jugador luego de su turno.
+ * Completa la cantidad de fichas de cada jugador, a 7, luego de su turno.
  */
-void Juego::reestablecerFichas(){
+void Juego::completarFichas(Jugador* jugador) {
+    ///Genera un valor diferente cada vez que se llame a la funcion dependiendo de la hora y fecha.
+    srand (time(NULL));
+
+    int cantFichas = jugador->getListaFichas()->getLen();
+
+    if (cantFichas > 7) {
+        for (cantFichas; cantFichas == 7; cantFichas++) {
+            ///Obtiene un int aleatorio
+            int random = rand() % cantFichas + 1;
+            ///Obtiene la ficha del pool
+            Ficha* randomFicha = poolFichas->getNode(random)->getFicha();
+            ///Elimina la ficha del pool
+            poolFichas->deleteNode(randomFicha);
+            ///Actualiza la cantidad de Fichas en el pool
+            setCantFichas(poolFichas->getLen());
+            ///Agrega la ficha a la lista del jugador1
+            jugador->getListaFichas()->newNode(randomFicha);
+        }
+    } else {
+        cout << "Ya posee 7 fichas" << endl;
+    }
 
 }
 
+/**
+ * Verifica la cantidad de turnos pasados de todos los jugadores
+ */
+void Juego::checkTurnosPasados(){
+    int cantJ1;
+    int cantJ2;
+    int cantJ3;
+    int cantJ4;
+    if (cantJugadoresActuales == 2) {
+        cantJ1 = j1->getTurnosPasados();
+        cantJ2 = j2->getTurnosPasados();
+        if (cantJ1 == cantJ2 == 2) {
+            terminado = true;
+        }
+    } else if (cantJugadoresActuales == 3) {
+        cantJ1 = j1->getTurnosPasados();
+        cantJ2 = j2->getTurnosPasados();
+        cantJ3 = j3->getTurnosPasados();
+        if (cantJ1 == cantJ2 == cantJ3 == 2) {
+            terminado = true;
+        }
+    } else { //cantJugadores == 4
+        cantJ1 = j1->getTurnosPasados();
+        cantJ2 = j2->getTurnosPasados();
+        cantJ3 = j3->getTurnosPasados();
+        cantJ4 = j4->getTurnosPasados();
+        if (cantJ1 == cantJ2 == cantJ3 == cantJ4 == 2) {
+            terminado = true;
+        }
+    }
+}
 
+/**
+ *
+ */
+void Juego::checkTerminado() {
+    if (terminado == true) {
+        cout << "El juego ha terminado!" << endl;
+        int puntajeJ1;
+        int puntajeJ2;
+        int puntajeJ3;
+        int puntajeJ4;
 
+        if (cantJugadoresActuales == 2) {
+
+            puntajeJ1 = j1->getPuntaje();
+            puntajeJ2 = j2->getPuntaje();
+
+            if ((puntajeJ1 > puntajeJ2)) {
+                setGanador(j1);
+            } else if ((puntajeJ2 > puntajeJ1)) {
+                setGanador(j2);
+            }
+
+        } else if (cantJugadoresActuales == 3) {
+
+            puntajeJ1 = j1->getPuntaje();
+            puntajeJ2 = j2->getPuntaje();
+            puntajeJ3 = j3->getPuntaje();
+
+            if ((puntajeJ1 > puntajeJ2) && (puntajeJ1 > puntajeJ3)) {
+                setGanador(j1);
+            } else if ((puntajeJ2 > puntajeJ1) && (puntajeJ2 > puntajeJ3)) {
+                setGanador(j2);
+            } else if ((puntajeJ3 > puntajeJ2) && (puntajeJ3 > puntajeJ1)) {
+                setGanador(j3);
+            }
+
+        } else if (cantJugadoresActuales == 4) {
+
+            puntajeJ1 = j1->getPuntaje();
+            puntajeJ2 = j2->getPuntaje();
+            puntajeJ3 = j3->getPuntaje();
+            puntajeJ4 = j4->getPuntaje();
+
+            if ((puntajeJ1 > puntajeJ2) && (puntajeJ1 > puntajeJ3) && (puntajeJ1 > puntajeJ4)) {
+                setGanador(j1);
+            } else if ((puntajeJ2 > puntajeJ1) && (puntajeJ2 > puntajeJ3) && (puntajeJ2 > puntajeJ4)) {
+                setGanador(j2);
+            } else if ((puntajeJ3 > puntajeJ2) && (puntajeJ3 > puntajeJ1) && (puntajeJ3 > puntajeJ4)) {
+                setGanador(j3);
+            } else if((puntajeJ4>puntajeJ2) && (puntajeJ4>puntajeJ3) && (puntajeJ4>puntajeJ1)) {
+                setGanador(j4);
+            }
+
+        }
+
+        cout << "Ganador: " << ganador->getNombre();
+
+    }
+
+}
+
+/**
+ * Define quien es el jugador que continua en turno.
+ */
+void Juego::siguienteTurno() {
+    if (enTurno == j1) {
+        setEnTurno(j2);
+    } else if (enTurno == j2) {
+        setEnTurno(j3);
+    } else if (enTurno == j3) {
+        setEnTurno(j4);
+    } else {
+        setEnTurno(j1);
+    }
+}

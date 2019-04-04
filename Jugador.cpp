@@ -6,7 +6,6 @@
  *
  * @author Ruben Salas
  * @since 27/03/19.
- * @version 1.1
  */
 
 

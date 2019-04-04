@@ -9,6 +9,7 @@ class Cuadricula {
 
 private:
     List* listaCuadricula;
+    int hola;
 
     //int tamano;
     //Node casillasOcu[0];

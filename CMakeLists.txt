@@ -7,7 +7,7 @@ include_directories(.)
 
 add_executable(Scrabble
         README.md Ficha.cpp Ficha.h FichaCreator.cpp FichaCreator.h Juego.cpp Juego.h Jugador.cpp
-        Jugador.h List.cpp List.h main.cpp Node.cpp Node.h Cuadricula.cpp Cuadricula.h)
+        Jugador.h List.cpp List.h mainCLion.cpp Node.cpp Node.h Cuadricula.cpp Cuadricula.h)
 
 #find_package(PkgConfig REQUIRED)
 #pkg_check_modules(JSON-C json-c)

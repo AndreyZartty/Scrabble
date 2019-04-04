@@ -11,7 +11,6 @@ using namespace std;
  *
  * @author Ruben Salas
  * @since 26/03/19.
- * @version 1.1
  */
 
 
