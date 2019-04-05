@@ -15,8 +15,8 @@
 /**
  * Constructor de Juego.
  */
-Juego::Juego(string _codigo, int _cantJugadoresPermitidos){
-    codigo = _codigo;
+Juego::Juego(int _cantJugadoresPermitidos){
+    codigo = "0000";
     creator = new FichaCreator();
     poolFichas = nullptr;
     cantFichas = 0;
@@ -28,7 +28,9 @@ Juego::Juego(string _codigo, int _cantJugadoresPermitidos){
     j4 = nullptr;
     cuadricula = new Cuadricula();
     terminado = false;
+    iniciado = false;
     enTurno = nullptr;
+    ganador = nullptr;
 }
 
 /**
@@ -225,6 +227,22 @@ void Juego::setTerminado(bool _terminado) {
 
 /**
  *
+ * @return
+ */
+bool Juego::isIniciado(){
+    return iniciado;
+}
+
+/**
+ *
+ * @param _iniciado
+ */
+void Juego::setIniciado(bool _iniciado) {
+    iniciado = _iniciado;
+}
+
+/**
+ *
  */
 Jugador* Juego::getEnTurno() {
     return enTurno;
@@ -258,12 +276,23 @@ void Juego::setGanador(Jugador* _ganador) {
 //Funciones
 
 
+void Juego::generarCodigo(int numJuego) {
+    string numJuegoStr = to_string(numJuego);
+    if (numJuego >= 10) {
+        setCodigo("00" + numJuegoStr);
+    } else {
+        setCodigo("000" + numJuegoStr);
+    }
+    cout << "\nCodigo de Juego #" << numJuegoStr << ": " << codigo << endl;
+}
+
 /**
  * Añade un jugador y verifica si hay campo en el juego.
  * @param nJugador
  */
-void Juego::addJugador(Jugador* nJugador) {
+void Juego::addJugador(string nombre) {
     if (j4 == nullptr) {
+        Jugador* nJugador = new Jugador(nombre);
         if (j3 == nullptr) {
             if (j2 == nullptr) {
                 if (j1 == nullptr) {
@@ -296,7 +325,7 @@ void Juego::crearFichas(){
     ///Agrega el valor de la cantidad de fichas que hayan en el pool
     setCantFichas(poolFichas->getLen());
 
-    cout << "Fichas creadas.\n" << endl;
+    cout << "Fichas Creadas.\n" << endl;
 
 }
 
@@ -546,3 +575,5 @@ void Juego::siguienteTurno() {
         setEnTurno(j1);
     }
 }
+
+

@@ -29,19 +29,20 @@ private:
     List* poolFichas;
     int cantFichas;
     bool terminado;
+    bool iniciado;
     Jugador* enTurno;
     Jugador* ganador;
 
 public:
-    Juego(string codigo, int _cantJugadoresPermitidos);
+    Juego(int _cantJugadoresPermitidos);
 
     //Getters & Setters
     string getCodigo();
     void setCodigo(string _codigo);
-    int getCantJugadoresActuales();
-    void setCantJugadoresActuales(int _cantJugadoresActuales);
     int getCantJugadoresPermitidos();
     void setCantJugadoresPermitidos(int _cantJugadoresPermitidos);
+    int getCantJugadoresActuales();
+    void setCantJugadoresActuales(int _cantJugadoresActuales);
     Jugador* getJ1();
     void setJ1(Jugador* _j1);
     Jugador* getJ2();
@@ -62,11 +63,15 @@ public:
     void setEnTurno(Jugador* _jugador);
     bool isTerminado();
     void setTerminado(bool _terminado);
+    bool isIniciado();
+    void setIniciado(bool _iniciado);
+
     Jugador* getGanador();
     void setGanador(Jugador *ganador);
 
     //Funciones
-    void addJugador(Jugador* nJugador);
+    void generarCodigo(int numJuego);
+    void addJugador(string nombre);
     void crearFichas();
     void repartirFichas();
     void completarFichas(Jugador* jugador);
