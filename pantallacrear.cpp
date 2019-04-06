@@ -104,8 +104,23 @@ int pantallaCrear::Crear_J(){
     struct json_object *tempCodigo;
     json_object *parsed_jsonCodigo = json_tokener_parse(recvBuff);
     json_object_object_get_ex(parsed_jsonCodigo, "CODIGO", &tempCodigo);
-    code = json_object_get_string(tempCodigo);
-    cout<<"Mensaje del Servidor: " << code <<"\n"<<endl;
+
+
+
+    struct json_object *tempErrorCodigo;
+    json_object *parsed_jsonErrorCodigo = json_tokener_parse(recvBuff);
+    json_object_object_get_ex(parsed_jsonErrorCodigo, "ERRORCODIGO", &tempErrorCodigo);
+
+    if (json_object_get_string(tempCodigo) != 0 && json_object_get_string(tempErrorCodigo) == 0) {
+        code = json_object_get_string(tempCodigo);
+        cout<<"Mensaje del Servidor: " << code <<"\n"<<endl;
+    } else {
+        cout << json_object_get_string(tempErrorCodigo) << endl;
+    }
+
+
+
+    //cout<<"Mensaje del Servidor: " << code <<"\n"<<endl;
 
 
 
@@ -114,11 +129,10 @@ int pantallaCrear::Crear_J(){
 
     ::close(fd);
 
-    //pantallaEspera *tab = new pantallaEspera;
-    //tab->setCode(code);
-    //tab->show();
-    //hide();
+
 }
+
+
 
 void pantallaCrear::on_graf_button_clicked()
 {
