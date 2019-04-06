@@ -69,12 +69,11 @@ int pantallaunirse::SendJson()
     json_object *jobj = json_object_new_object();
 
     QString txt = ui->lineEdit->text();
-    QString txt2 = ui->lineEdit_2->text();
-    json_object *jstring = json_object_new_string(txt.toUtf8());
-    json_object *jstring2 = json_object_new_string(txt2.toUtf8());
+    json_object *jstring = json_object_new_string(getJugador().c_str());
+    json_object *jstring2 = json_object_new_string(txt.toUtf8());
 
-    json_object_object_add(jobj,"JUGADOR", jstring2);
-    json_object_object_add(jobj,"CODIGO", jstring);
+    json_object_object_add(jobj,"JUGADOR", jstring);
+    json_object_object_add(jobj,"CODIGO", jstring2);
 
 
     if (strcpy(sendBuff, json_object_to_json_string(jobj)) == NULL) {
@@ -109,6 +108,11 @@ int pantallaunirse::SendJson()
 void pantallaunirse::on_UnirseButton_clicked()
 {
     SendJson();
+    pantallaEspera *tab = new pantallaEspera();
+    tab->setCode(code);
+    tab->setLinetxt();
+    tab->show();
+    hide();
 }
 
 string pantallaunirse::getJugador(){

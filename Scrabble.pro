@@ -27,6 +27,7 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
     pantallacrear.cpp \
+    pantallaespera.cpp \
         pantallajuego.cpp \
     pantallatablero.cpp \
     pantallaunirse.cpp \
@@ -34,6 +35,7 @@ SOURCES += \
 
 HEADERS += \
     pantallacrear.h \
+    pantallaespera.h \
         pantallajuego.h \
     pantallatablero.h \
     pantallaunirse.h \
@@ -41,6 +43,7 @@ HEADERS += \
 
 FORMS += \
     pantallacrear.ui \
+    pantallaespera.ui \
         pantallajuego.ui \
     pantallatablero.ui \
     pantallaunirse.ui

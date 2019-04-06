@@ -30,7 +30,9 @@ void PantallaJuego::on_pushButton_clicked()
 
 void PantallaJuego::on_pushButton_2_clicked()
 {
+    QString nick = ui->line_nick->text();
     pantallaunirse *tab = new pantallaunirse;
+    tab->setJugador(nick.toUtf8().constData());
     tab->show();
     hide();
 }

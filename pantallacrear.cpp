@@ -99,16 +99,25 @@ int pantallaCrear::Crear_J(){
         exit(-1);
     }
 
+
+
     struct json_object *tempCodigo;
     json_object *parsed_jsonCodigo = json_tokener_parse(recvBuff);
     json_object_object_get_ex(parsed_jsonCodigo, "CODIGO", &tempCodigo);
     code = json_object_get_string(tempCodigo);
-
     cout<<"Mensaje del Servidor: " << code <<"\n"<<endl;
+
+
+
 
     memset(sendBuff, 0, MAXDATASIZE);
 
     ::close(fd);
+
+    pantallaEspera *tab = new pantallaEspera;
+    tab->setCode(code);
+    //tab->show();
+    //hide();
 }
 
 void pantallaCrear::on_graf_button_clicked()

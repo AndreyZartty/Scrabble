@@ -2,6 +2,7 @@
 #define PANTALLAUNIRSE_H
 
 #include <QWidget>
+#include <pantallaespera.h>
 
 using namespace std;
 namespace Ui {

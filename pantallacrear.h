@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <pantallatablero.h>
+#include <pantallaespera.h>
 
 using namespace std;
 namespace Ui {
