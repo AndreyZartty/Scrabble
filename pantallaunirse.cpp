@@ -54,7 +54,7 @@ int pantallaunirse::SendJson()
     {
         client.sin_family = AF_INET;
         client.sin_port = htons(PORT);
-        client.sin_addr.s_addr = inet_addr("192.168.100.17");
+        client.sin_addr.s_addr = inet_addr("192.168.100.13");
         memset(client.sin_zero, '\0', sizeof(client.sin_zero));
     }
 
@@ -67,11 +67,12 @@ int pantallaunirse::SendJson()
     json_object *jobj = json_object_new_object();
 
     QString txt = ui->lineEdit->text();
+    QString txt2 = ui->lineEdit_2->text();
     json_object *jstring = json_object_new_string(txt.toUtf8());
-    json_object *jstring2 = json_object_new_string("uvuvwevwevwe onyetenyevwe ugwemubwem ossas");
+    json_object *jstring2 = json_object_new_string(txt2.toUtf8());
 
-    //json_object_object_add(jobj,"Nombre", jstring2);
-    json_object_object_add(jobj,"Codigo", jstring);
+    json_object_object_add(jobj,"Nombre", jstring2);
+    json_object_object_add(jobj,"CODIGO", jstring);
 
 
 
