@@ -2,6 +2,14 @@
 <ui version="4.0">
  <class>pantallaTablero</class>
  <widget class="QWidget" name="pantallaTablero">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>751</width>
+    <height>451</height>
+   </rect>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -29,6 +37,16 @@
    </property>
    <property name="text">
     <string>PASAR</string>
+   </property>
+  </widget>
+  <widget class="QGraphicsView" name="graphicsView">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>10</y>
+     <width>541</width>
+     <height>421</height>
+    </rect>
    </property>
   </widget>
  </widget>
