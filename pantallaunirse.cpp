@@ -68,7 +68,11 @@ int pantallaunirse::SendJson()
 
     json_object *jobj = json_object_new_object();
 
+    ///Obtiene el codigo del lineEdit
     QString txt = ui->lineEdit->text();
+    string codeStr = txt.toUtf8().constData();
+    setCode(codeStr);
+
     json_object *jstring = json_object_new_string(getJugador().c_str());
     json_object *jstring2 = json_object_new_string(txt.toUtf8());
 
@@ -109,7 +113,7 @@ void pantallaunirse::on_UnirseButton_clicked()
 {
     SendJson();
     pantallaEspera *tab = new pantallaEspera();
-    tab->setCode(code);
+    tab->setCode(getCode());
     tab->setLinetxt();
     tab->show();
     hide();
