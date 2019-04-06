@@ -41,7 +41,9 @@ int pantallaunirse::SendJson()
 
     fd = socket(AF_INET, SOCK_STREAM, 0);
 
-    char buf[MAXDATASIZE];
+    char sendBuff[MAXDATASIZE];
+    char recvBuff[MAXDATASIZE];
+
 
     struct hostent *he;
 
@@ -54,7 +56,7 @@ int pantallaunirse::SendJson()
     {
         client.sin_family = AF_INET;
         client.sin_port = htons(PORT);
-        client.sin_addr.s_addr = inet_addr("192.168.100.13");
+        client.sin_addr.s_addr = inet_addr("192.168.100.17");
         memset(client.sin_zero, '\0', sizeof(client.sin_zero));
     }
 
@@ -71,17 +73,18 @@ int pantallaunirse::SendJson()
     json_object *jstring = json_object_new_string(txt.toUtf8());
     json_object *jstring2 = json_object_new_string(txt2.toUtf8());
 
-    json_object_object_add(jobj,"Nombre", jstring2);
+    json_object_object_add(jobj,"JUGADOR", jstring2);
     json_object_object_add(jobj,"CODIGO", jstring);
 
 
-
-    if (strcpy(buf, json_object_to_json_string(jobj)) == NULL) {
+    if (strcpy(sendBuff, json_object_to_json_string(jobj)) == NULL) {
         printf("ERROR strcpy()");
         exit(-1);
     }
+    cout<<"FUNKA MRDA2\n"<<endl;
 
-    if (write(fd, buf, strlen(buf)) == -1)
+
+    if (write(fd, sendBuff, strlen(sendBuff)) == -1)
     {
         printf("ERROR write()");
         exit(-1);
@@ -89,7 +92,16 @@ int pantallaunirse::SendJson()
 
     printf("Written data\n");
 
-    memset(buf, 0, MAXDATASIZE);
+    if ((numbytes=recv(fd,recvBuff,MAXDATASIZE,0)) < 0){
+
+        printf("Error en recv() \n");
+        exit(-1);
+    }
+
+    cout<<"Mensaje del Servidor: " << recvBuff <<"\n"<<endl;
+
+    memset(sendBuff, 0, MAXDATASIZE);
+
 
     ::close(fd);
 }
