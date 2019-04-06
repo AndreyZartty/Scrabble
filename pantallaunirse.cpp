@@ -70,8 +70,8 @@ int pantallaunirse::SendJson()
 
     ///Obtiene el codigo del lineEdit
     QString txt = ui->lineEdit->text();
-    string codeStr = txt.toUtf8().constData();
-    setCode(codeStr);
+    setCode(txt.toUtf8().constData());
+    //setCode(code);
 
     json_object *jstring = json_object_new_string(getJugador().c_str());
     json_object *jstring2 = json_object_new_string(txt.toUtf8());

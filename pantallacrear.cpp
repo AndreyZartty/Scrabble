@@ -114,10 +114,11 @@ int pantallaCrear::Crear_J(){
 
     ::close(fd);
 
-    //pantallaEspera *tab = new pantallaEspera;
-    //tab->setCode(code);
-    //tab->show();
-    //hide();
+    pantallaEspera *tab = new pantallaEspera;
+    tab->setCode(getCode());
+    tab->setLinetxt();
+    tab->show();
+    hide();
 }
 
 void pantallaCrear::on_graf_button_clicked()

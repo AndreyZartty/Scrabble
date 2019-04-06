@@ -23,10 +23,6 @@ string pantallaEspera::getcode(){
 }
 
 void pantallaEspera::setLinetxt(){
-    cout << "TEST CODIGO EN LINEEDIT" << endl;
-    cout << "TEST CODE: " << code << endl;
     QString qcode = QString::fromStdString(code);
     ui->lineEdit->setText(qcode);
-    ui->lineEdit->update();
-    cout << "TEST 2 CODIGO EN LINEEDIT" << endl;
 }
