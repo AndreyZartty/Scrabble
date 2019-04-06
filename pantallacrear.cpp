@@ -99,13 +99,9 @@ int pantallaCrear::Crear_J(){
         exit(-1);
     }
 
-
-
     struct json_object *tempCodigo;
     json_object *parsed_jsonCodigo = json_tokener_parse(recvBuff);
     json_object_object_get_ex(parsed_jsonCodigo, "CODIGO", &tempCodigo);
-
-
 
     struct json_object *tempErrorCodigo;
     json_object *parsed_jsonErrorCodigo = json_tokener_parse(recvBuff);
@@ -118,13 +114,8 @@ int pantallaCrear::Crear_J(){
         cout << json_object_get_string(tempErrorCodigo) << endl;
     }
 
-
-
-    //cout<<"Mensaje del Servidor: " << code <<"\n"<<endl;
-
-
-
-
+    ///Se limpian los Buffers
+    memset(recvBuff, 0, MAXDATASIZE);
     memset(sendBuff, 0, MAXDATASIZE);
 
     ::close(fd);
