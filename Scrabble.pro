@@ -26,14 +26,17 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
+    pantallacrear.cpp \
         pantallajuego.cpp \
     pantallatablero.cpp
 
 HEADERS += \
+    pantallacrear.h \
         pantallajuego.h \
     pantallatablero.h
 
 FORMS += \
+    pantallacrear.ui \
         pantallajuego.ui \
     pantallatablero.ui
 

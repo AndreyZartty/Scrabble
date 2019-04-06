@@ -2,7 +2,7 @@
 #define PANTALLAJUEGO_H
 
 #include <QMainWindow>
-#include <pantallatablero.h>
+#include <pantallacrear.h>
 
 using namespace std;
 
@@ -17,10 +17,9 @@ class PantallaJuego : public QMainWindow
 public:
     explicit PantallaJuego(QWidget *parent = nullptr);
     ~PantallaJuego();
-private slots:
-    int Crear_J();
 
-    void on_graf_button_clicked();
+private slots:
+    void on_pushButton_clicked();
 
 private:
     Ui::PantallaJuego *ui;
