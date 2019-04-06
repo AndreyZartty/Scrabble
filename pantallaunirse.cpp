@@ -110,3 +110,16 @@ void pantallaunirse::on_UnirseButton_clicked()
 {
     SendJson();
 }
+
+string pantallaunirse::getJugador(){
+    return jugador;
+}
+string pantallaunirse::getCode(){
+    return code;
+}
+void pantallaunirse::setCode(string _code){
+    code = _code;
+}
+void pantallaunirse::setJugador(string _jugador){
+    jugador = _jugador;
+}

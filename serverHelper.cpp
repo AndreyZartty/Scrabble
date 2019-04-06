@@ -85,3 +85,10 @@ int serverHelper::send(string instruccion) {
     ::close(fd);
 
 }
+
+string serverHelper::getCodigo(){
+    return codigo;
+}
+void serverHelper::setCodigo(string _codigo){
+    codigo = _codigo;
+}

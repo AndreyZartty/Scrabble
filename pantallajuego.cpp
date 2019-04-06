@@ -21,7 +21,9 @@ PantallaJuego::~PantallaJuego()
 
 void PantallaJuego::on_pushButton_clicked()
 {
+    QString nick = ui->line_nick->text();
     pantallaCrear *tab = new pantallaCrear;
+    tab->setJugador(nick.toUtf8().constData());
     tab->show();
     hide();
 }
@@ -31,4 +33,11 @@ void PantallaJuego::on_pushButton_2_clicked()
     pantallaunirse *tab = new pantallaunirse;
     tab->show();
     hide();
+}
+
+string PantallaJuego::getJugador(){
+    return jugador;
+}
+void PantallaJuego::setJugador(string _jugador){
+    jugador = _jugador;
 }

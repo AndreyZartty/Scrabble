@@ -9,13 +9,13 @@ using namespace std;
 class serverHelper
 {
 private:
-    string codigo;
+    string codigo = "0000";
 
 public:
     serverHelper();
 
     string getCodigo();
-    void setCodigo();
+    void setCodigo(string _codigo);
 
     int send(string instruccion);
 

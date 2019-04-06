@@ -29,13 +29,15 @@ SOURCES += \
     pantallacrear.cpp \
         pantallajuego.cpp \
     pantallatablero.cpp \
-    pantallaunirse.cpp
+    pantallaunirse.cpp \
+    serverHelper.cpp
 
 HEADERS += \
     pantallacrear.h \
         pantallajuego.h \
     pantallatablero.h \
-    pantallaunirse.h
+    pantallaunirse.h \
+    serverHelper.h
 
 FORMS += \
     pantallacrear.ui \

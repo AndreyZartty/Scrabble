@@ -19,6 +19,8 @@ class PantallaJuego : public QMainWindow
 public:
     explicit PantallaJuego(QWidget *parent = nullptr);
     ~PantallaJuego();
+    string getJugador();
+    void setJugador(string _jugador);
 
 private slots:
     void on_pushButton_clicked();
@@ -27,6 +29,7 @@ private slots:
 
 private:
     Ui::PantallaJuego *ui;
+    string jugador;
 };
 
 #endif // PANTALLAJUEGO_H

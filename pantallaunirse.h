@@ -3,6 +3,7 @@
 
 #include <QWidget>
 
+using namespace std;
 namespace Ui {
 class pantallaunirse;
 }
@@ -14,6 +15,10 @@ class pantallaunirse : public QWidget
 public:
     explicit pantallaunirse(QWidget *parent = nullptr);
     ~pantallaunirse();
+    string getJugador();
+    string getCode();
+    void setCode(string _code);
+    void setJugador(string _jugador);
 
 private slots:
     void on_UnirseButton_clicked();
@@ -21,6 +26,8 @@ private slots:
 private:
     Ui::pantallaunirse *ui;
     int SendJson();
+    string code;
+    string jugador;
 };
 
 #endif // PANTALLAUNIRSE_H

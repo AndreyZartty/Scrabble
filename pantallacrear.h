@@ -16,6 +16,10 @@ class pantallaCrear : public QWidget
 public:
     explicit pantallaCrear(QWidget *parent = nullptr);
     ~pantallaCrear();
+    string getJugador();
+    string getCode();
+    void setCode(string _code);
+    void setJugador(string _jugador);
 private slots:
     int Crear_J();
 
@@ -23,6 +27,8 @@ private slots:
 
 private:
     string code;
+    string jugador;
+
     Ui::pantallaCrear *ui;
 };
 

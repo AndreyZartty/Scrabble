@@ -66,12 +66,12 @@ int pantallaCrear::Crear_J(){
         return 1;
     }
 
-    QString nick = ui->nick_line->text();
+    //QString nick = ui->nick_line->text();
     QString cant = ui->cant_spin->text();
 
     json_object *jobj = json_object_new_object();
 
-    json_object *jstring = json_object_new_string(nick.toUtf8().constData());
+    json_object *jstring = json_object_new_string(getJugador().c_str());
 
     json_object *jint = json_object_new_int(cant.toInt());
 
@@ -118,3 +118,15 @@ void pantallaCrear::on_graf_button_clicked()
     hide();
 }
 
+string pantallaCrear::getJugador(){
+    return jugador;
+}
+string pantallaCrear::getCode(){
+    return code;
+}
+void pantallaCrear::setCode(string _code){
+    code = _code;
+}
+void pantallaCrear::setJugador(string _jugador){
+    jugador = _jugador;
+}
