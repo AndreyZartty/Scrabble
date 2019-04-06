@@ -42,7 +42,8 @@ int pantallaCrear::Crear_J(){
 
     fd = socket(AF_INET, SOCK_STREAM, 0);
 
-    char buf[MAXDATASIZE];
+    char sendBuff[MAXDATASIZE];
+    char recvBuff[MAXDATASIZE];
 
     struct hostent *he;
 
@@ -79,12 +80,12 @@ int pantallaCrear::Crear_J(){
 
 
 
-    if (strcpy(buf, json_object_to_json_string(jobj)) == NULL) {
+    if (strcpy(sendBuff, json_object_to_json_string(jobj)) == NULL) {
         printf("ERROR strcpy()");
         exit(-1);
     }
 
-    if (write(fd, buf, strlen(buf)) == -1)
+    if (write(fd, sendBuff, strlen(sendBuff)) == -1)
     {
         printf("ERROR write()");
         exit(-1);
@@ -92,7 +93,20 @@ int pantallaCrear::Crear_J(){
 
     printf("Written data\n");
 
-    memset(buf, 0, MAXDATASIZE);
+    if ((numbytes=recv(fd,recvBuff,MAXDATASIZE,0)) < 0){
+
+        printf("Error en recv() \n");
+        exit(-1);
+    }
+
+    struct json_object *tempCodigo;
+    json_object *parsed_jsonCodigo = json_tokener_parse(recvBuff);
+    json_object_object_get_ex(parsed_jsonCodigo, "CODIGO", &tempCodigo);
+    code = json_object_get_string(tempCodigo);
+
+    cout<<"Mensaje del Servidor: " << code <<"\n"<<endl;
+
+    memset(sendBuff, 0, MAXDATASIZE);
 
     ::close(fd);
 }

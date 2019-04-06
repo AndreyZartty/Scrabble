@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <pantallatablero.h>
 
+using namespace std;
 namespace Ui {
 class pantallaCrear;
 }
@@ -21,6 +22,7 @@ private slots:
     void on_graf_button_clicked();
 
 private:
+    string code;
     Ui::pantallaCrear *ui;
 };
 
