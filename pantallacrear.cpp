@@ -15,6 +15,8 @@
 #include <json-c/json.h>
 #include <json-c/debug.h>
 #include <json-c/json_object.h>
+#include <QMessageBox>
+
 
 #define PORT 3550
 #define MAXDATASIZE 1000
@@ -112,6 +114,10 @@ int pantallaCrear::Crear_J(){
         cout<<"Mensaje del Servidor: " << code <<"\n"<<endl;
     } else {
         cout << json_object_get_string(tempErrorCodigo) << endl;
+        QMessageBox::information(this, tr("Error"), tr("Máxima cantidad de juegos activos alcanzada, intente ingresar luego."));
+        close();
+        return 0;
+
     }
 
     ///Se limpian los Buffers

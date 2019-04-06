@@ -43,3 +43,5 @@ string PantallaJuego::getJugador(){
 void PantallaJuego::setJugador(string _jugador){
     jugador = _jugador;
 }
+
+

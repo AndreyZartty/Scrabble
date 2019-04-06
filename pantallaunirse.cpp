@@ -15,6 +15,7 @@
 #include <json-c/json.h>
 #include <json-c/debug.h>
 #include <json-c/json_object.h>
+#include <QMessageBox>
 
 #define PORT 3550
 #define MAXDATASIZE 1000
@@ -71,7 +72,6 @@ int pantallaunirse::SendJson()
     ///Obtiene el codigo del lineEdit
     QString txt = ui->lineEdit->text();
     setCode(txt.toUtf8().constData());
-    //setCode(code);
 
     json_object *jstring = json_object_new_string(getJugador().c_str());
     json_object *jstring2 = json_object_new_string(txt.toUtf8());
@@ -100,7 +100,39 @@ int pantallaunirse::SendJson()
         printf("Error en recv() \n");
         exit(-1);
     }
+/////////////////////////////////////////////////////////////////
+    struct json_object *tempConfir;
+    json_object *parsed_jsonConfir = json_tokener_parse(recvBuff);
+    json_object_object_get_ex(parsed_jsonConfir, "CONFIRMACION", &tempConfir);
 
+    struct json_object *tempComen;
+    json_object *parsed_jsonComen = json_tokener_parse(recvBuff);
+    json_object_object_get_ex(parsed_jsonComen, "COMENZAR", &tempComen);
+
+    if (json_object_get_string(tempConfir) != 0 && json_object_get_string(tempComen) != 0) {
+        string temp = json_object_get_string(tempComen);
+        if(temp == "FALSE"){
+            cout<<"Mensaje del Servidor: " << temp <<"\n"<<endl;
+            pantallaEspera *tab = new pantallaEspera;
+            tab->setCode(getCode());
+            tab->setLinetxt();
+            tab->show();
+            hide();
+        } else {
+            pantallaTablero *tab = new pantallaTablero;
+            tab->setCode(getCode());
+            tab->show();
+            hide();
+        }
+
+    } else {
+        string temp = json_object_get_string(tempConfir);
+        QMessageBox::information(this, tr("Error"), tr(temp.c_str()));
+        close();
+        return 0;
+
+    }
+/////////////////////////////////////////////////////////////////
     cout<<"Mensaje del Servidor: " << recvBuff <<"\n"<<endl;
 
     memset(sendBuff, 0, MAXDATASIZE);
@@ -112,11 +144,7 @@ int pantallaunirse::SendJson()
 void pantallaunirse::on_UnirseButton_clicked()
 {
     SendJson();
-    pantallaEspera *tab = new pantallaEspera();
-    tab->setCode(getCode());
-    tab->setLinetxt();
-    tab->show();
-    hide();
+
 }
 
 string pantallaunirse::getJugador(){
