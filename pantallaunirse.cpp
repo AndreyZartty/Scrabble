@@ -117,6 +117,7 @@ int pantallaunirse::SendJson()
             tab->setCode(getCode());
             tab->setLinetxt();
             tab->show();
+            //tab->SendJson();
             hide();
         } else {
             pantallaTablero *tab = new pantallaTablero;
@@ -136,6 +137,7 @@ int pantallaunirse::SendJson()
     cout<<"Mensaje del Servidor: " << recvBuff <<"\n"<<endl;
 
     memset(sendBuff, 0, MAXDATASIZE);
+    memset(recvBuff, 0, MAXDATASIZE);
 
 
     ::close(fd);

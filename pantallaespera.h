@@ -2,6 +2,7 @@
 #define PANTALLAESPERA_H
 
 #include <QWidget>
+#include "pantallatablero.h"
 
 using namespace std;
 namespace Ui {
@@ -18,6 +19,9 @@ public:
     void setCode(string _code);
     string getcode();
     void setLinetxt();
+    int SendJson();
+    int MendJson();
+
 
 private:
     Ui::pantallaEspera *ui;
