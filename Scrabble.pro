@@ -28,17 +28,20 @@ SOURCES += \
         main.cpp \
     pantallacrear.cpp \
         pantallajuego.cpp \
-    pantallatablero.cpp
+    pantallatablero.cpp \
+    pantallaunirse.cpp
 
 HEADERS += \
     pantallacrear.h \
         pantallajuego.h \
-    pantallatablero.h
+    pantallatablero.h \
+    pantallaunirse.h
 
 FORMS += \
     pantallacrear.ui \
         pantallajuego.ui \
-    pantallatablero.ui
+    pantallatablero.ui \
+    pantallaunirse.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -46,3 +49,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 LIBS += -L/home/jose/json-c/ -ljson-c
+

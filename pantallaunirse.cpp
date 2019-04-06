@@ -1,5 +1,5 @@
-#include "pantallacrear.h"
-#include "ui_pantallacrear.h"
+#include "pantallaunirse.h"
+#include "ui_pantallaunirse.h"
 
 #include <stdio.h>
 #include <sys/types.h>
@@ -21,21 +21,20 @@
 
 using namespace std;
 
-pantallaCrear::pantallaCrear(QWidget *parent) :
+pantallaunirse::pantallaunirse(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::pantallaCrear)
+    ui(new Ui::pantallaunirse)
 {
     ui->setupUi(this);
-    connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(Crear_J()));
-
 }
 
-pantallaCrear::~pantallaCrear()
+pantallaunirse::~pantallaunirse()
 {
     delete ui;
 }
 
-int pantallaCrear::Crear_J(){
+int pantallaunirse::SendJson()
+{
     char* str;
     int fd, numbytes;
     struct sockaddr_in client;
@@ -65,17 +64,14 @@ int pantallaCrear::Crear_J(){
         return 1;
     }
 
-    QString nick = ui->nick_line->text();
-    QString cant = ui->cant_spin->text();
-
     json_object *jobj = json_object_new_object();
 
-    json_object *jstring = json_object_new_string(nick.toUtf8().constData());
+    QString txt = ui->lineEdit->text();
+    json_object *jstring = json_object_new_string(txt.toUtf8());
+    json_object *jstring2 = json_object_new_string("uvuvwevwevwe onyetenyevwe ugwemubwem ossas");
 
-    json_object *jint = json_object_new_int(cant.toInt());
-
-    json_object_object_add(jobj,"JUGADOR", jstring);
-    json_object_object_add(jobj,"JUGADORES PERMITIDOS", jint);
+    //json_object_object_add(jobj,"Nombre", jstring2);
+    json_object_object_add(jobj,"Codigo", jstring);
 
 
 
@@ -97,10 +93,7 @@ int pantallaCrear::Crear_J(){
     ::close(fd);
 }
 
-void pantallaCrear::on_graf_button_clicked()
+void pantallaunirse::on_UnirseButton_clicked()
 {
-    pantallaTablero *tab = new pantallaTablero;
-    tab->show();
-    hide();
+    SendJson();
 }
-

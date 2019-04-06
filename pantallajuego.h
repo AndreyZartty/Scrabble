@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <pantallacrear.h>
+#include <pantallaunirse.h>
+
 
 using namespace std;
 
@@ -20,6 +22,8 @@ public:
 
 private slots:
     void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
 
 private:
     Ui::PantallaJuego *ui;

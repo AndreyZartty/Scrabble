@@ -25,3 +25,10 @@ void PantallaJuego::on_pushButton_clicked()
     tab->show();
     hide();
 }
+
+void PantallaJuego::on_pushButton_2_clicked()
+{
+    pantallaunirse *tab = new pantallaunirse;
+    tab->show();
+    hide();
+}
