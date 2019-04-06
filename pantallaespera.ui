@@ -39,7 +39,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>twdy</string>
+    <string/>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
