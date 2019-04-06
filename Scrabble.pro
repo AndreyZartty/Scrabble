@@ -27,6 +27,7 @@ CONFIG += c++11
 SOURCES += \
         mainwindow.cpp \
     main.cpp \
+    serverHelper.cpp
    # Cuadricula.cpp \
    # Ficha.cpp \
    # FichaCreator.cpp \
@@ -37,6 +38,7 @@ SOURCES += \
 
 HEADERS += \
         mainwindow.h \
+    serverHelper.h
   #  Cuadricula.h \
   #  Ficha.h \
   #  FichaCreator.h \
