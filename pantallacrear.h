@@ -22,6 +22,8 @@ public:
     string getCode();
     void setCode(string _code);
     void setJugador(string _jugador);
+    string getIP();
+    void setIP(string ip);
 private slots:
     int Crear_J();
 
@@ -30,6 +32,7 @@ private slots:
 private:
     string code;
     string jugador;
+    string IP;
 
     Ui::pantallaCrear *ui;
 };

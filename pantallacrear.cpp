@@ -74,11 +74,12 @@ int pantallaCrear::Crear_J(){
     json_object *jobj = json_object_new_object();
 
     json_object *jstring = json_object_new_string(getJugador().c_str());
-
     json_object *jint = json_object_new_int(cant.toInt());
+    json_object *jip = json_object_new_string(getIP().c_str());
 
     json_object_object_add(jobj,"JUGADOR", jstring);
     json_object_object_add(jobj,"JUGADORES PERMITIDOS", jint);
+    json_object_object_add(jobj,"IP",jip);
 
 
 
@@ -156,4 +157,12 @@ void pantallaCrear::setCode(string _code){
 }
 void pantallaCrear::setJugador(string _jugador){
     jugador = _jugador;
+}
+
+string pantallaCrear::getIP() {
+    return IP;
+}
+
+void pantallaCrear::setIP(string ip) {
+    IP = ip;
 }

@@ -21,15 +21,17 @@ public:
     ~PantallaJuego();
     string getJugador();
     void setJugador(string _jugador);
+    string getIP();
+    void setIP(string ip);
 
 private slots:
     void on_pushButton_clicked();
-
     void on_pushButton_2_clicked();
 
 private:
     Ui::PantallaJuego *ui;
     string jugador;
+    string IP;
 };
 
 #endif // PANTALLAJUEGO_H

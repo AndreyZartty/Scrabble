@@ -22,19 +22,19 @@
 
 using namespace std;
 
-pantallaunirse::pantallaunirse(QWidget *parent) :
+pantallaUnirse::pantallaUnirse(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::pantallaunirse)
 {
     ui->setupUi(this);
 }
 
-pantallaunirse::~pantallaunirse()
+pantallaUnirse::~pantallaUnirse()
 {
     delete ui;
 }
 
-int pantallaunirse::SendJson()
+int pantallaUnirse::SendJson()
 {
     char* str;
     int fd, numbytes;
@@ -75,9 +75,11 @@ int pantallaunirse::SendJson()
 
     json_object *jstring = json_object_new_string(getJugador().c_str());
     json_object *jstring2 = json_object_new_string(txt.toUtf8());
+    json_object *jip = json_object_new_string(getIP().c_str());
 
     json_object_object_add(jobj,"JUGADOR", jstring);
     json_object_object_add(jobj,"CODIGO", jstring2);
+    json_object_object_add(jobj,"IP",jip);
 
 
     if (strcpy(sendBuff, json_object_to_json_string(jobj)) == NULL) {
@@ -149,21 +151,29 @@ int pantallaunirse::SendJson()
     ::close(fd);
 }
 
-void pantallaunirse::on_UnirseButton_clicked()
+void pantallaUnirse::on_UnirseButton_clicked()
 {
     SendJson();
 
 }
 
-string pantallaunirse::getJugador(){
+string pantallaUnirse::getJugador(){
     return jugador;
 }
-string pantallaunirse::getCode(){
+string pantallaUnirse::getCode(){
     return code;
 }
-void pantallaunirse::setCode(string _code){
+void pantallaUnirse::setCode(string _code){
     code = _code;
 }
-void pantallaunirse::setJugador(string _jugador){
+void pantallaUnirse::setJugador(string _jugador){
     jugador = _jugador;
+}
+
+string pantallaUnirse::getIP() {
+    return IP;
+}
+
+void pantallaUnirse::setIP(string ip) {
+    IP = ip;
 }

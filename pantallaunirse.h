@@ -12,17 +12,19 @@ namespace Ui {
 class pantallaunirse;
 }
 
-class pantallaunirse : public QWidget
+class pantallaUnirse : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit pantallaunirse(QWidget *parent = nullptr);
-    ~pantallaunirse();
+    explicit pantallaUnirse(QWidget *parent = nullptr);
+    ~pantallaUnirse();
     string getJugador();
     string getCode();
     void setCode(string _code);
     void setJugador(string _jugador);
+    string getIP();
+    void setIP(string ip);
 
 private slots:
     void on_UnirseButton_clicked();
@@ -32,6 +34,7 @@ private:
     int SendJson();
     string code;
     string jugador;
+    string IP;
 };
 
 #endif // PANTALLAUNIRSE_H
