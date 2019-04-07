@@ -16,6 +16,7 @@
 #include <json-c/debug.h>
 #include <json-c/json_object.h>
 #include <QMessageBox>
+#include <thread>
 
 #define PORT 3550
 #define MAXDATASIZE 1000
@@ -25,6 +26,8 @@ pantallaTablero::pantallaTablero(QWidget *parent) :
     ui(new Ui::pantallaTablero)
 {
     ui->setupUi(this);
+    std::thread t1 (&pantallaTablero::sendJsonPasar, this);
+
 }
 
 pantallaTablero::~pantallaTablero()
@@ -45,16 +48,22 @@ void pantallaTablero::setLabels(string _j1, string _j2, string _j3, string _j4){
     ui->lbl_J3->setText(QString::fromUtf8(_j3.c_str()));
     ui->lbl_J4->setText(QString::fromUtf8(_j4.c_str()));
 
+    ui->label->setText("TEST");
+
 }
 
 void pantallaTablero::on_pushButton_2_clicked()
 {
-    sendJsonPasar();
+    ui->pushButton_2->setEnabled(false);
+    ui->label->setText("Esperando Turno...");
+    t1.join();
+    //sendJsonPasar();
 }
 
 int pantallaTablero::sendJsonPasar(){
     char* str;
     int fd, numbytes;
+    t1.detach();
     struct sockaddr_in client;
 
     fd = socket(AF_INET, SOCK_STREAM, 0);
@@ -127,6 +136,8 @@ int pantallaTablero::sendJsonPasar(){
             ///Se tiene el nombre del jugador en turno
             cout << "INICIO CHECK TURNO" << endl;
 
+            ui->label->setText("Esperando Turno...");
+
             ///Se limpian los Buffers
             memset(recvBuff, 0, MAXDATASIZE);
             memset(sendBuff, 0, MAXDATASIZE);
@@ -134,6 +145,8 @@ int pantallaTablero::sendJsonPasar(){
             ::close(fd);
 
             checkTurno();
+            //std::thread t1 (&pantallaTablero::checkTurno, this);
+            //t1.join();
 
         } else {
             struct json_object *tempErr;
@@ -157,6 +170,9 @@ int pantallaTablero::sendJsonPasar(){
 
 int pantallaTablero::checkTurno(){
     cout << "CHECKING TURNO" << endl;
+
+    ui->label->setText("Esperando Turno...");
+
     char* str;
     int fd, numbytes;
     struct sockaddr_in client;
@@ -227,9 +243,12 @@ int pantallaTablero::checkTurno(){
         if (temp == getServHelp().getJugador()) {
             cout << "En Turno" << endl;
             ui->label->setText("En Turno");
+            ui->pushButton_2->setEnabled(true);
 
         } else {
             cout << "Esperando Turno..." << endl;
+
+            ui->label->setText("Esperando Turno...");
 
             ///Se limpian los Buffers
             memset(recvBuff, 0, MAXDATASIZE);
@@ -262,3 +281,5 @@ void pantallaTablero::on_label_linkHovered(const QString &link)
 {
     cout << "TEST LABEL" << endl;
 }
+
+

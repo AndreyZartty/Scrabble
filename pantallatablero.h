@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "serverHelper.h"
+#include <thread>
 
 using namespace std;
 namespace Ui {
@@ -24,13 +25,14 @@ public:
 private slots:
     void on_pushButton_2_clicked();
 
-    void on_lbl_Turno_linkActivated(const QString &link);
+    //void on_lbl_Turno_linkActivated(const QString &link);
 
     void on_label_linkHovered(const QString &link);
 
 private:
     Ui::pantallaTablero *ui;
     serverHelper sH;
+    std::thread t1;
 
 };
 
