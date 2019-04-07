@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include "pantallatablero.h"
+#include "serverHelper.h"
+#include <QMessageBox>
 
 using namespace std;
 namespace Ui {
@@ -16,8 +18,8 @@ class pantallaEspera : public QWidget
 public:
     explicit pantallaEspera(QWidget *parent = nullptr);
     ~pantallaEspera();
-    void setCode(string _code);
-    string getcode();
+    void setServHelp(serverHelper _sH);
+    serverHelper getServHelp();
     void setLinetxt();
     int SendJson();
 
@@ -26,7 +28,7 @@ private slots:
 
 private:
     Ui::pantallaEspera *ui;
-    string code;
+    serverHelper sH;
 };
 
 #endif // PANTALLAESPERA_H

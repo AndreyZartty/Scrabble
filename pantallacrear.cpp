@@ -127,7 +127,10 @@ int pantallaCrear::Crear_J(){
     ::close(fd);
 
     pantallaEspera *tab = new pantallaEspera;
-    tab->setCode(getCode());
+    serverHelper *sH = new serverHelper;
+    sH->setCodigo(getCode());
+    sH->setJugador(getJugador());
+    tab->setServHelp(*sH);
     tab->setLinetxt();
     tab->show();
     hide();

@@ -35,15 +35,15 @@ pantallaEspera::~pantallaEspera()
     delete ui;
 }
 
-void pantallaEspera::setCode(string _code){
-    code = _code;
+void pantallaEspera::setServHelp(serverHelper _sH){
+    sH = _sH;
 }
-string pantallaEspera::getcode(){
-    return code;
+serverHelper pantallaEspera::getServHelp(){
+    return sH;
 }
 
 void pantallaEspera::setLinetxt(){
-    QString qcode = QString::fromStdString(code);
+    QString qcode = QString::fromStdString(sH.getCodigo());
     ui->lineEdit->setText(qcode);
     //SendJson();
 }
@@ -83,7 +83,7 @@ void pantallaEspera::setLinetxt(){
 
      json_object *jstring = json_object_new_string("Esperando Jugadores...");
 
-     json_object *jstring_codigo = json_object_new_string(getcode().c_str());
+     json_object *jstring_codigo = json_object_new_string(sH.getCodigo().c_str());
 
      json_object_object_add(jobj,"JUGARCL", jstring);
 
@@ -190,11 +190,14 @@ void pantallaEspera::setLinetxt(){
                  cout<<"Mensaje del Servidor: " << temp<<endl;
              }
              pantallaTablero *tab = new pantallaTablero;
-             tab->setCode(getcode());
-             tab->show();
+             tab->setServHelp(sH);
              tab->setLabels(tempJ1L, tempJ2L, tempJ3L, tempJ4L);
+             tab->show();
              hide();
              //break;
+         }
+         else {
+             QMessageBox::information(this, tr("Error"), tr("Faltan jugadores por unirse"));
          }
      }
      cout<< "TENGA UN BONITO DIA" << endl;

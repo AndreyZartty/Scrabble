@@ -13,11 +13,11 @@ pantallaTablero::~pantallaTablero()
     delete ui;
 }
 
-string pantallaTablero::getCode(){
-    return code;
+void pantallaTablero::setServHelp(serverHelper _sH){
+    sH = _sH;
 }
-void pantallaTablero::setCode(string _code){
-    code = _code;
+serverHelper pantallaTablero::getServHelp(){
+    return sH;
 }
 
 void pantallaTablero::setLabels(string _j1, string _j2, string _j3, string _j4){
@@ -25,4 +25,13 @@ void pantallaTablero::setLabels(string _j1, string _j2, string _j3, string _j4){
     ui->lbl_J2->setText(QString::fromUtf8(_j2.c_str()));
     ui->lbl_J3->setText(QString::fromUtf8(_j3.c_str()));
     ui->lbl_J4->setText(QString::fromUtf8(_j4.c_str()));
+}
+
+void pantallaTablero::on_pushButton_2_clicked()
+{
+
+}
+
+void sendJsonPasar(){
+
 }

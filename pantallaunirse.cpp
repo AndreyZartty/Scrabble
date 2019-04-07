@@ -114,13 +114,19 @@ int pantallaunirse::SendJson()
         if(temp == "FALSE"){
             cout<<"Mensaje del Servidor: " << temp <<"\n"<<endl;
             pantallaEspera *tab = new pantallaEspera;
-            tab->setCode(getCode());
+            serverHelper *sH = new serverHelper;
+            sH->setCodigo(getCode());
+            sH->setJugador(getJugador());
+            tab->setServHelp(*sH);
             tab->setLinetxt();
             tab->show();
             hide();
         } else {
             pantallaEspera *tab = new pantallaEspera;
-            tab->setCode(getCode());
+            serverHelper *sH = new serverHelper;
+            sH->setCodigo(getCode());
+            sH->setJugador(getJugador());
+            tab->setServHelp(*sH);
             tab->setLinetxt();
             tab->show();
             hide();

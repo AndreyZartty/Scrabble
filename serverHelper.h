@@ -10,14 +10,15 @@ class serverHelper
 {
 private:
     string codigo = "0000";
+    string jugador = "xxxx";
 
 public:
     serverHelper();
 
     string getCodigo();
     void setCodigo(string _codigo);
-
-    int send(string instruccion);
+    string getJugador();
+    void setJugador(string _jugador);
 
 
 };

@@ -2,6 +2,7 @@
 #define PANTALLATABLERO_H
 
 #include <QWidget>
+#include "serverHelper.h"
 
 using namespace std;
 namespace Ui {
@@ -15,12 +16,16 @@ class pantallaTablero : public QWidget
 public:
     explicit pantallaTablero(QWidget *parent = nullptr);
     ~pantallaTablero();
-    void setCode(string _code);
-    string getCode();
+    void setServHelp(serverHelper _sH);
+    serverHelper getServHelp();
     void setLabels(string _j1, string _j2, string _j3, string _j4);
+    void sendJsonPasar();
+private slots:
+    void on_pushButton_2_clicked();
+
 private:
     Ui::pantallaTablero *ui;
-    string code;
+    serverHelper sH;
 
 };
 

@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <pantallaespera.h>
 #include <pantallatablero.h>
+#include "serverHelper.h"
+
 
 using namespace std;
 namespace Ui {
