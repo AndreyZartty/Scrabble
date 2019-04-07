@@ -117,11 +117,11 @@ int pantallaunirse::SendJson()
             tab->setCode(getCode());
             tab->setLinetxt();
             tab->show();
-            //tab->SendJson();
             hide();
         } else {
-            pantallaTablero *tab = new pantallaTablero;
+            pantallaEspera *tab = new pantallaEspera;
             tab->setCode(getCode());
+            tab->setLinetxt();
             tab->show();
             hide();
         }

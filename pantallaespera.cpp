@@ -48,101 +48,6 @@ void pantallaEspera::setLinetxt(){
     //SendJson();
 }
 
- int pantallaEspera::MendJson()
-{
-    char* str;
-    int fd, numbytes, r;
-    struct sockaddr_in client;
-
-    fd = socket(AF_INET, SOCK_STREAM, 0);
-
-    char sendBuff[MAXDATASIZE];
-    char recvBuff[MAXDATASIZE];
-
-
-    struct hostent *he;
-
-    if (fd < 0)
-    {
-        printf("Error : Could not create socket\n");
-        return 1;
-    }
-    else
-    {
-        client.sin_family = AF_INET;
-        client.sin_port = htons(PORT);
-        client.sin_addr.s_addr = inet_addr("192.168.100.17");
-        memset(client.sin_zero, '\0', sizeof(client.sin_zero));
-    }
-
-    if (::connect(fd, (const struct sockaddr *)&client, sizeof(client)) < 0)
-    {
-        printf("ERROR connecting to server\n");
-        return 1;
-    }
-
-    json_object *jobj = json_object_new_object();
-
-    json_object *jstring = json_object_new_string("Esperando Jugadores...");
-
-    json_object_object_add(jobj,"COMENZAR", jstring);
-
-    //while(true){
-        if (strcpy(sendBuff, json_object_to_json_string(jobj)) == NULL) {
-            printf("ERROR strcpy()");
-            exit(-1);
-        }
-
-        if (write(fd, sendBuff, strlen(sendBuff)) == -1)
-        {
-            printf("ERROR write()");
-            exit(-1);
-        }
-
-        printf("Written data\n");
-
-        cout<< "Test while pantalla espera" << endl;/*
-        for (;;) {
-                    r = read(fd, recvBuff, MAXDATASIZE);
-
-                    if (r == -1) {
-                        perror("read");
-                        return EXIT_FAILURE;
-                    }
-                    if (r == 0)
-                        break;
-                    printf("READ: %s\n", recvBuff);
-        }
-
-        if ((numbytes=recv(fd,recvBuff,MAXDATASIZE,0)) != 0){
-
-             cout<< "Test while pantalla espera ifg" << endl;
-            printf("Error en recv() \n");
-            exit(-1);
-        }
-        cout<< "Test while pantalla espera 4" << endl;
-        struct json_object *tempConfir;
-        json_object *parsed_jsonConfir = json_tokener_parse(recvBuff);
-        json_object_object_get_ex(parsed_jsonConfir, "COMENZAR", &tempConfir);
-        string temp = json_object_get_string(tempConfir);
-        cout<< "Test while pantalla espera 3" << endl;
-        if(temp=="TRUE"){
-            cout<< "NO VA A EJECUTARSE GAY " << endl;
-            pantallaTablero *tab = new pantallaTablero;
-            tab->setCode(getcode());
-            tab->show();
-            hide();
-            //break;
-        }
-
-        memset(sendBuff, 0, MAXDATASIZE);
-        memset(recvBuff, 0, MAXDATASIZE);
-
-        cout<< "Test while pantalla espera 2" << endl;
-    //}*/
-    ::close(fd);
-}
-
  int pantallaEspera::SendJson(){
      char* str;
      int fd, numbytes;
@@ -198,6 +103,7 @@ void pantallaEspera::setLinetxt(){
      }
 
      cout<<"Written data"<<endl;
+     memset(sendBuff, 0, MAXDATASIZE);
 
      if ((numbytes=recv(fd,recvBuff,MAXDATASIZE,0)) < 0){
 
@@ -210,15 +116,83 @@ void pantallaEspera::setLinetxt(){
      struct json_object *tempConfir;
      json_object *parsed_jsonConfir = json_tokener_parse(recvBuff);
      json_object_object_get_ex(parsed_jsonConfir, "JUGARSRV", &tempConfir);
+     memset(recvBuff, 0, MAXDATASIZE);
 
 
      if (json_object_get_string(tempConfir) != 0) {
          string temp = json_object_get_string(tempConfir);
          if(temp=="TRUE"){
              cout<< "NO VA A EJECUTARSE GAY " << endl;
+             string tempJ1L = "";
+             string tempJ2L = "";
+             string tempJ3L = "";
+             string tempJ4L = "";
+
+             json_object *jobjJ = json_object_new_object();
+
+             json_object *jstringJ = json_object_new_string("Obteniendo nombres...");
+
+             json_object_object_add(jobjJ,"NOMBRES", jstring);
+
+             json_object_object_add(jobjJ, "CODIGO", jstring_codigo);
+
+
+             if (strcpy(sendBuff, json_object_to_json_string(jobjJ)) == NULL) {
+                 printf("ERROR strcpy()");
+                 exit(-1);
+             }
+
+             if (write(fd, sendBuff, strlen(sendBuff)) == -1)
+             {
+                 printf("ERROR write()");
+                 exit(-1);
+             }
+
+
+
+             if ((numbytes=recv(fd,recvBuff,MAXDATASIZE,0)) < 0){
+
+                 printf("Error en recv() \n");
+                 exit(-1);
+             }
+
+             struct json_object *tempJ1;
+             json_object *parsed_jsonJ1 = json_tokener_parse(recvBuff);
+             json_object_object_get_ex(parsed_jsonJ1, "JUGADOR1", &tempJ1);
+
+             struct json_object *tempJ2;
+             json_object *parsed_jsonJ2 = json_tokener_parse(recvBuff);
+             json_object_object_get_ex(parsed_jsonJ2, "JUGADOR2", &tempJ2);
+
+             struct json_object *tempJ3;
+             json_object *parsed_jsonJ3 = json_tokener_parse(recvBuff);
+             json_object_object_get_ex(parsed_jsonJ3, "JUGADOR3", &tempJ3);
+
+             struct json_object *tempJ4;
+             json_object *parsed_jsonJ4 = json_tokener_parse(recvBuff);
+             json_object_object_get_ex(parsed_jsonJ4, "JUGADOR4", &tempJ4);
+
+             if (json_object_get_string(tempJ1) != 0 && json_object_get_string(tempJ2) != 0) {
+                 tempJ1L = json_object_get_string(tempJ1);
+                 tempJ2L = json_object_get_string(tempJ2);
+                 if (json_object_get_string(tempJ3) != 0){
+                     tempJ3L = json_object_get_string(tempJ3);
+                     if (json_object_get_string(tempJ4) != 0){
+                         tempJ4L = json_object_get_string(tempJ4);
+
+                     }
+                 }
+             }else {
+                 struct json_object *tempErr;
+                 json_object *parsed_jsonErr = json_tokener_parse(recvBuff);
+                 json_object_object_get_ex(parsed_jsonErr, "ERROR", &tempErr);
+                 string temp = json_object_get_string(tempErr);
+                 cout<<"Mensaje del Servidor: " << temp<<endl;
+             }
              pantallaTablero *tab = new pantallaTablero;
              tab->setCode(getcode());
              tab->show();
+             tab->setLabels(tempJ1L, tempJ2L, tempJ3L, tempJ4L);
              hide();
              //break;
          }
@@ -235,3 +209,8 @@ void pantallaEspera::setLinetxt(){
 
 
 
+
+void pantallaEspera::on_pushButton_clicked()
+{
+    SendJson();
+}

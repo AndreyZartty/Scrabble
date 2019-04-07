@@ -17,9 +17,11 @@ public:
     ~pantallaTablero();
     void setCode(string _code);
     string getCode();
+    void setLabels(string _j1, string _j2, string _j3, string _j4);
 private:
     Ui::pantallaTablero *ui;
     string code;
+
 };
 
 #endif // PANTALLATABLERO_H
