@@ -31,7 +31,8 @@ SOURCES += \
         pantallajuego.cpp \
     pantallatablero.cpp \
     pantallaunirse.cpp \
-    serverHelper.cpp
+    serverHelper.cpp \
+    dragwidget.cpp
 
 HEADERS += \
     pantallacrear.h \
@@ -39,7 +40,8 @@ HEADERS += \
         pantallajuego.h \
     pantallatablero.h \
     pantallaunirse.h \
-    serverHelper.h
+    serverHelper.h \
+    dragwidget.h
 
 FORMS += \
     pantallacrear.ui \
