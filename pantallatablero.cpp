@@ -337,7 +337,7 @@ int pantallaTablero::sendJsonScrabble(){
     json_object *jF5L = json_object_new_string(ui->F5Llbl->text().toUtf8());
     json_object *jF6L = json_object_new_string(ui->F6Llbl->text().toUtf8());
     json_object *jF7L = json_object_new_string(ui->F7Llbl->text().toUtf8());
-    json_object *jF1P = json_object_new_string(ui->F1Plbl->text().toUtf8());
+    json_object *jF1P = json_object_new_string();
     json_object *jF2P = json_object_new_string(ui->F2Plbl->text().toUtf8());
     json_object *jF3P = json_object_new_string(ui->F3Plbl->text().toUtf8());
     json_object *jF4P = json_object_new_string(ui->F4Plbl->text().toUtf8());

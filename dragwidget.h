@@ -6,6 +6,9 @@
 #include <QPushButton>
 #include <QObject>
 #include <QLabel>
+#include <iostream>
+
+using namespace std;
 
 QT_BEGIN_NAMESPACE
 class QDragEnterEvent;
@@ -18,10 +21,12 @@ class DragWidget : public QFrame
     Q_OBJECT
 public:
     explicit DragWidget(QWidget *parent = nullptr);
+    void setLabels(string _j1, string _j2, string _j3, string _j4);
 private:
     QTableWidget *matriz;
     QPushButton* ret;
     QLabel* ficha;
+    int Col, Row;
 
 protected:
     void dragEnterEvent(QDragEnterEvent *event) override;

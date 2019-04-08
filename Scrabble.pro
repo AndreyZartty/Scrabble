@@ -32,7 +32,8 @@ SOURCES += \
     pantallatablero.cpp \
     pantallaunirse.cpp \
     serverHelper.cpp \
-    dragwidget.cpp
+    dragwidget.cpp \
+    prueba.cpp
 
 HEADERS += \
     pantallacrear.h \
@@ -41,14 +42,16 @@ HEADERS += \
     pantallatablero.h \
     pantallaunirse.h \
     serverHelper.h \
-    dragwidget.h
+    dragwidget.h \
+    prueba.h
 
 FORMS += \
     pantallacrear.ui \
     pantallaespera.ui \
         pantallajuego.ui \
     pantallatablero.ui \
-    pantallaunirse.ui
+    pantallaunirse.ui \
+    prueba.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

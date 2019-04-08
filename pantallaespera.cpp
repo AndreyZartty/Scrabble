@@ -123,7 +123,6 @@ void pantallaEspera::setLinetxt(){
      if (json_object_get_string(tempConfir) != 0) {
          string temp = json_object_get_string(tempConfir);
          if(temp=="TRUE"){
-             cout<< "NO VA A EJECUTARSE GAY " << endl;
              string tempJ1L = "";
              string tempJ2L = "";
              string tempJ3L = "";
@@ -191,10 +190,19 @@ void pantallaEspera::setLinetxt(){
                  cout<<"Mensaje del Servidor: " << temp<<endl;
              }
              pantallaTablero *tab = new pantallaTablero;
+             DragWidget *dr = new DragWidget(tab);
+
              tab->setServHelp(sH);
              tab->setLabels(tempJ1L, tempJ2L, tempJ3L, tempJ4L);
              tab->show();
+
+             //prueba *tab2 = new prueba;
+             //DragWidget *dr = new DragWidget(tab2);
+             //tab2->show();
+
              hide();
+
+
              //break;
          }
          else {

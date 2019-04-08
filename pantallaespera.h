@@ -5,6 +5,8 @@
 #include "pantallatablero.h"
 #include "serverHelper.h"
 #include <QMessageBox>
+#include "prueba.h"
+#include "dragwidget.h"
 
 using namespace std;
 namespace Ui {

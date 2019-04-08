@@ -55,43 +55,43 @@ DragWidget::DragWidget(QWidget *parent)
 
 
     QLabel *houseIcon = new QLabel(this);
-    houseIcon->setPixmap(QPixmap("/home/cucho16/ImScrabble/Ñ.png"));
+    houseIcon->setPixmap(QPixmap("/home/jose/ProyectosGit/Scrabble/ImScrabble/Ñ.png"));
     houseIcon->move(75, 450);
     houseIcon->show();
     houseIcon->setAttribute(Qt::WA_DeleteOnClose);
 
     QLabel *houseIcon2 = new QLabel(this);
-    houseIcon2->setPixmap(QPixmap("/home/cucho16/ImScrabble/Ñ.png"));
+    houseIcon2->setPixmap(QPixmap("/home/jose/ProyectosGit/Scrabble/ImScrabble/Ñ.png"));
     houseIcon2->move(135, 450);
     houseIcon2->show();
     houseIcon2->setAttribute(Qt::WA_DeleteOnClose);
 
     QLabel *houseIcon3 = new QLabel(this);
-    houseIcon3->setPixmap(QPixmap("/home/cucho16/ImScrabble/Ñ.png"));
+    houseIcon3->setPixmap(QPixmap("/home/jose/ProyectosGit/Scrabble/ImScrabble/Ñ.png"));
     houseIcon3->move(195, 450);
     houseIcon3->show();
     houseIcon3->setAttribute(Qt::WA_DeleteOnClose);
 
     QLabel *houseIcon4 = new QLabel(this);
-    houseIcon4->setPixmap(QPixmap("/home/cucho16/ImScrabble/Ñ.png"));
+    houseIcon4->setPixmap(QPixmap("/home/jose/ProyectosGit/Scrabble/ImScrabble/Ñ.png"));
     houseIcon4->move(255, 450);
     houseIcon4->show();
     houseIcon4->setAttribute(Qt::WA_DeleteOnClose);
 
     QLabel *houseIcon5 = new QLabel(this);
-    houseIcon5->setPixmap(QPixmap("/home/cucho16/ImScrabble/Ñ.png"));
+    houseIcon5->setPixmap(QPixmap("/home/jose/ProyectosGit/Scrabble/ImScrabble/Ñ.png"));
     houseIcon5->move(315, 450);
     houseIcon5->show();
     houseIcon5->setAttribute(Qt::WA_DeleteOnClose);
 
     QLabel *houseIcon6 = new QLabel(this);
-    houseIcon6->setPixmap(QPixmap("/home/cucho16/ImScrabble/Ñ.png"));
+    houseIcon6->setPixmap(QPixmap("/home/jose/ProyectosGit/Scrabble/ImScrabble/Ñ.png"));
     houseIcon6->move(375, 450);
     houseIcon6->show();
     houseIcon6->setAttribute(Qt::WA_DeleteOnClose);
 
     QLabel *houseIcon7 = new QLabel(this);
-    houseIcon7->setPixmap(QPixmap("/home/cucho16/ImScrabble/Ñ.png"));
+    houseIcon7->setPixmap(QPixmap("/home/jose/ProyectosGit/Scrabble/ImScrabble/Ñ.png"));
     houseIcon7->move(435, 450);
     houseIcon7->show();
     houseIcon7->setAttribute(Qt::WA_DeleteOnClose);
@@ -149,6 +149,8 @@ void DragWidget::dropEvent(QDropEvent *event)
             if(dx< newIcon->x() + 28 and newIcon->x() + 28 < Dx){
                 while(cR<15){
                     if(dy< newIcon->y() + 13 and newIcon->y() + 13 < Dy){
+                        this->Row = cR;
+                        this->Col = cC;
                         this->ficha = newIcon;
                         this->matriz->setCellWidget(cR,cC,newIcon);
                         newIcon->show();
@@ -237,4 +239,23 @@ void DragWidget::on_ret_clicked(){
     current->show();
     current->setAttribute(Qt::WA_DeleteOnClose);
     cout << "xd" << endl;
+}
+void DragWidget::setLabels(string _j1, string _j2, string _j3, string _j4){
+    ui->lbl_J1->setText(QString::fromUtf8(_j1.c_str()));
+    ui->lbl_J2->setText(QString::fromUtf8(_j2.c_str()));
+    ui->lbl_J3->setText(QString::fromUtf8(_j3.c_str()));
+    ui->lbl_J4->setText(QString::fromUtf8(_j4.c_str()));
+
+    ui->lbl_p1->setText("0");
+    ui->lbl_p2->setText("0");
+
+    if(_j3 != ""){
+        ui->lbl_p3->setText("0");
+        if(_j4 != ""){
+            ui->lbl_p4->setText("0");
+        }
+    }
+
+    ui->label->setText("TEST");
+
 }
