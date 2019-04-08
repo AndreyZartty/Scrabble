@@ -189,16 +189,19 @@ void pantallaEspera::setLinetxt(){
                  string temp = json_object_get_string(tempErr);
                  cout<<"Mensaje del Servidor: " << temp<<endl;
              }
-             pantallaTablero *tab = new pantallaTablero;
-             DragWidget *dr = new DragWidget(tab);
+             //pantallaTablero *tab = new pantallaTablero;
+             QWidget *w = new QWidget();
+             DragWidget *dr = new DragWidget(w);
+             dr->setLabels(tempJ1L, tempJ2L, tempJ3L, tempJ4L);
 
-             tab->setServHelp(sH);
-             tab->setLabels(tempJ1L, tempJ2L, tempJ3L, tempJ4L);
-             tab->show();
+             dr->setServHelp(sH);
+             /*tab->setLabels(tempJ1L, tempJ2L, tempJ3L, tempJ4L);
+             tab->show();*/
 
              //prueba *tab2 = new prueba;
              //DragWidget *dr = new DragWidget(tab2);
              //tab2->show();
+             w->show();
 
              hide();
 
