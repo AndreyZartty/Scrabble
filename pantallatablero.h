@@ -22,12 +22,15 @@ public:
     void setLabels(string _j1, string _j2, string _j3, string _j4);
     int sendJsonPasar();
     int checkTurno();
+    int sendJsonScrabble();
 private slots:
     void on_pushButton_2_clicked();
 
     //void on_lbl_Turno_linkActivated(const QString &link);
 
     void on_label_linkHovered(const QString &link);
+
+    void on_pushButton_clicked();
 
 private:
     Ui::pantallaTablero *ui;

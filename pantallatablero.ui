@@ -39,23 +39,13 @@
     <string>PASAR</string>
    </property>
   </widget>
-  <widget class="QGraphicsView" name="graphicsView">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>10</y>
-     <width>541</width>
-     <height>421</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>600</x>
+     <x>580</x>
      <y>30</y>
-     <width>129</width>
-     <height>111</height>
+     <width>81</width>
+     <height>131</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -101,6 +91,112 @@
    <property name="text">
     <string>TextLabel</string>
    </property>
+  </widget>
+  <widget class="QWidget" name="verticalLayoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>670</x>
+     <y>30</y>
+     <width>71</width>
+     <height>131</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <widget class="QLabel" name="lbl_p1">
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="lbl_p2">
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="lbl_p3">
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="lbl_p4">
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>20</y>
+     <width>291</width>
+     <height>80</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QLineEdit" name="F1Llbl"/>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="F2Llbl"/>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="F3Llbl"/>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="F4Llbl"/>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="F5Llbl"/>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="F6Llbl"/>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="F7Llbl"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>80</y>
+     <width>291</width>
+     <height>80</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <item>
+     <widget class="QLineEdit" name="F1Plbl"/>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="F2Plbl"/>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="F3Plbl"/>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="F4Plbl"/>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="F5Plbl"/>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="F6Plbl"/>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="F7Plbl"/>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>

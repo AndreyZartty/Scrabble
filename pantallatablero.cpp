@@ -26,7 +26,7 @@ pantallaTablero::pantallaTablero(QWidget *parent) :
     ui(new Ui::pantallaTablero)
 {
     ui->setupUi(this);
-    std::thread t1 (&pantallaTablero::sendJsonPasar, this);
+
 
 }
 
@@ -48,6 +48,16 @@ void pantallaTablero::setLabels(string _j1, string _j2, string _j3, string _j4){
     ui->lbl_J3->setText(QString::fromUtf8(_j3.c_str()));
     ui->lbl_J4->setText(QString::fromUtf8(_j4.c_str()));
 
+    ui->lbl_p1->setText("0");
+    ui->lbl_p2->setText("0");
+
+    if(_j3 != ""){
+        ui->lbl_p3->setText("0");
+        if(_j4 != ""){
+            ui->lbl_p4->setText("0");
+        }
+    }
+
     ui->label->setText("TEST");
 
 }
@@ -56,6 +66,7 @@ void pantallaTablero::on_pushButton_2_clicked()
 {
     ui->pushButton_2->setEnabled(false);
     ui->label->setText("Esperando Turno...");
+    std::thread t1 (&pantallaTablero::sendJsonPasar, this);
     t1.join();
     //sendJsonPasar();
 }
@@ -63,7 +74,6 @@ void pantallaTablero::on_pushButton_2_clicked()
 int pantallaTablero::sendJsonPasar(){
     char* str;
     int fd, numbytes;
-    t1.detach();
     struct sockaddr_in client;
 
     fd = socket(AF_INET, SOCK_STREAM, 0);
@@ -143,6 +153,7 @@ int pantallaTablero::sendJsonPasar(){
             memset(sendBuff, 0, MAXDATASIZE);
 
             ::close(fd);
+            //t1.detach();
 
             checkTurno();
             //std::thread t1 (&pantallaTablero::checkTurno, this);
@@ -282,4 +293,133 @@ void pantallaTablero::on_label_linkHovered(const QString &link)
     cout << "TEST LABEL" << endl;
 }
 
+int pantallaTablero::sendJsonScrabble(){
+    char* str;
+    int fd, numbytes;
+    struct sockaddr_in client;
 
+    fd = socket(AF_INET, SOCK_STREAM, 0);
+
+    char sendBuff[MAXDATASIZE];
+    char recvBuff[MAXDATASIZE];
+
+    struct hostent *he;
+
+    if (fd < 0)
+    {
+        printf("Error : Could not create socket\n");
+        return 1;
+    }
+    else
+    {
+        client.sin_family = AF_INET;
+        client.sin_port = htons(PORT);
+        client.sin_addr.s_addr = inet_addr("192.168.100.17");
+        memset(client.sin_zero, '\0', sizeof(client.sin_zero));
+    }
+
+    if (::connect(fd, (const struct sockaddr *)&client, sizeof(client)) < 0)
+    {
+        printf("ERROR connecting to server\n");
+        return 1;
+    }
+
+    json_object *jobj = json_object_new_object();
+
+    json_object *jstring = json_object_new_string(sH.getCodigo().c_str());
+
+    json_object_object_add(jobj,"CODIGO", jstring);
+
+    json_object *jF1L = json_object_new_string(ui->F1Llbl->text().toUtf8());
+    json_object *jF2L = json_object_new_string(ui->F2Llbl->text().toUtf8());
+    json_object *jF3L = json_object_new_string(ui->F3Llbl->text().toUtf8());
+    json_object *jF4L = json_object_new_string(ui->F4Llbl->text().toUtf8());
+    json_object *jF5L = json_object_new_string(ui->F5Llbl->text().toUtf8());
+    json_object *jF6L = json_object_new_string(ui->F6Llbl->text().toUtf8());
+    json_object *jF7L = json_object_new_string(ui->F7Llbl->text().toUtf8());
+    json_object *jF1P = json_object_new_string(ui->F1Plbl->text().toUtf8());
+    json_object *jF2P = json_object_new_string(ui->F2Plbl->text().toUtf8());
+    json_object *jF3P = json_object_new_string(ui->F3Plbl->text().toUtf8());
+    json_object *jF4P = json_object_new_string(ui->F4Plbl->text().toUtf8());
+    json_object *jF5P = json_object_new_string(ui->F5Plbl->text().toUtf8());
+    json_object *jF6P = json_object_new_string(ui->F6Plbl->text().toUtf8());
+    json_object *jF7P = json_object_new_string(ui->F7Plbl->text().toUtf8());
+
+    //json_object_object_add(jobj,"CODIGO", jstring);
+    json_object_object_add(jobj,"F1L", jF1L);
+    json_object_object_add(jobj,"F2L", jF2L);
+    json_object_object_add(jobj,"F3L", jF3L);
+    json_object_object_add(jobj,"F4L", jF4L);
+    json_object_object_add(jobj,"F5L", jF5L);
+    json_object_object_add(jobj,"F6L", jF6L);
+    json_object_object_add(jobj,"F7L", jF7L);
+    json_object_object_add(jobj,"F1P", jF1P);
+    json_object_object_add(jobj,"F2P", jF2P);
+    json_object_object_add(jobj,"F3P", jF3P);
+    json_object_object_add(jobj,"F4P", jF4P);
+    json_object_object_add(jobj,"F5P", jF5P);
+    json_object_object_add(jobj,"F6P", jF6P);
+    json_object_object_add(jobj,"F7P", jF7P);
+
+
+    if (strcpy(sendBuff, json_object_to_json_string(jobj)) == NULL) {
+        printf("ERROR strcpy()");
+        exit(-1);
+    }
+
+    if (write(fd, sendBuff, strlen(sendBuff)) == -1)
+    {
+        printf("ERROR write()");
+        exit(-1);
+    }
+
+    cout<<"Written data SCRABBLE"<<endl;
+
+    if ((numbytes=recv(fd,recvBuff,MAXDATASIZE,0)) < 0){
+
+        printf("Error en recv() \n");
+        exit(-1);
+    }
+    printf("READ SCRABBLE : %s\n", recvBuff);
+
+
+
+
+    struct json_object *tempVerif;
+    json_object *parsed_jsonVerif = json_tokener_parse(recvBuff);
+    json_object_object_get_ex(parsed_jsonVerif, "VERIFICACION", &tempVerif);
+
+    if (json_object_get_string(tempVerif) != 0) {
+        string temp = json_object_get_string(tempVerif);
+
+        if (temp == "false"){
+            //False, devolver fichas a lista jugador, permite volver a ponerlas, vuelve a empezar el turno
+            cout<<temp<<endl;
+            memset(recvBuff, 0, MAXDATASIZE);
+            memset(sendBuff, 0, MAXDATASIZE);
+
+            ::close(fd);
+        }else {
+            cout<<"puntos"<<endl;
+        }
+
+    }
+
+
+    ///Se limpian los Buffers
+    memset(recvBuff, 0, MAXDATASIZE);
+    memset(sendBuff, 0, MAXDATASIZE);
+
+    ::close(fd);
+}
+
+
+
+void pantallaTablero::on_pushButton_clicked()
+{
+    sendJsonScrabble();
+    ui->pushButton_2->setEnabled(false);
+    ui->label->setText("Esperando Turno...");
+    std::thread t1 (&pantallaTablero::sendJsonPasar, this);
+    t1.join();
+}

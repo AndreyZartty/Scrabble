@@ -104,6 +104,7 @@ void pantallaEspera::setLinetxt(){
 
      cout<<"Written data"<<endl;
      memset(sendBuff, 0, MAXDATASIZE);
+     cout<<"teeeeeest"<<endl;
 
      if ((numbytes=recv(fd,recvBuff,MAXDATASIZE,0)) < 0){
 
